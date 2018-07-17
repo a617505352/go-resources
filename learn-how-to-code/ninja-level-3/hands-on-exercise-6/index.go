@@ -1,9 +1,13 @@
 package main
 
+import (
+	"fmt"
+)
+
 func main() {
 	x := "James Bond"
 
 	if x == "James Bond" {
-		println(x)
+		fmt.Println(x)
 	}
 }
