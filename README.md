@@ -39,6 +39,7 @@
     - Capacity
     - Append
   - Maps
+    - Map Literals
 
 ### Type System
 
