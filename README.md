@@ -4,7 +4,7 @@
   <img src="https://user-images.githubusercontent.com/11765228/48174695-01aa0100-e344-11e8-8b31-5e6f05b84184.png" alt="gopher_head-min">
 </p>
 
-## Kep Points
+## Key Points
 
 ### Arrays
 
