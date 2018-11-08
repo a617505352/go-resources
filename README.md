@@ -6,10 +6,39 @@
 
 ## Key Points
 
-### Arrays
+### Packages
 
-- Slices
-- Maps
+- `import`
+
+### Variables
+
+- `var`
+  - Zero Values
+- Short Variable Declarations `:=`
+  - Type Inference
+
+### Flow Control
+
+- `defer`
+  - Stacking defers
+
+### Pointers
+
+- `*T`
+- `&`
+- `*`
+
+### Types
+
+- Structs
+  - Struct Literals
+- Arrays `[n]T`
+  - Slices `[]T`
+    - Slice Literals
+    - Length
+    - Capacity
+    - Append
+  - Maps
 
 ### Type System
 
@@ -33,7 +62,7 @@
     - Lock
     - Unlock
 - Channels
-  - make()
+  - `make`
   - Unbuffered Channels
   - Buffered Channels
 
