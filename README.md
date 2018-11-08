@@ -17,7 +17,7 @@
 - Interfaces
   - Method Sets
   - Polymorphism
-- Type embedding
+- Type Embedding
   - Inner Type Promotion
 - Identifiers
   - Exported
@@ -29,7 +29,13 @@
 - Race conditions
   - Race Detector
   - Atomic Functions
+  - Mutexes
+    - Lock
+    - Unlock
 - Channels
+  - make()
+  - Unbuffered Channels
+  - Buffered Channels
 
 ### Operating System
 
@@ -37,6 +43,7 @@
 - Threads
 - Queues
 
-## Books
+## Resources
 
+- [A Tour of Go](https://tour.golang.org/list)
 - [Go in Action](https://www.manning.com/books/go-in-action)
