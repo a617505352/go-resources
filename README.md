@@ -4,7 +4,7 @@
   <img src="https://user-images.githubusercontent.com/11765228/48174695-01aa0100-e344-11e8-8b31-5e6f05b84184.png" alt="gopher_head-min">
 </p>
 
-## Key Points
+## Golang Outline
 
 ### Packages
 
@@ -14,7 +14,7 @@
 
 - `var`
   - Zero Values
-- Short Variable Declarations `:=`
+- Short Variable Declarations
   - Type Inference
 
 ### Flow Control
@@ -28,12 +28,19 @@
 - `&`
 - `*`
 
+### Functions
+
+- Value Argument
+- Pointer Argument
+
 ### Types
 
+- Value Type
+- Pointer Type
 - Structs
   - Struct Literals
-- Arrays `[n]T`
-  - Slices `[]T`
+- Arrays
+  - Slices
     - Slice Literals
     - Length
     - Capacity
@@ -44,7 +51,10 @@
 ### Type System
 
 - Methods
+  - Value Receivers
+  - Pointer Receivers
 - Interfaces
+  - Empty interface
   - Method Sets
   - Polymorphism
 - Type Embedding
@@ -56,6 +66,7 @@
 ### Concurrency
 
 - Goroutines
+  - Select
 - Race conditions
   - Race Detector
   - Atomic Functions
@@ -63,9 +74,10 @@
     - Lock
     - Unlock
 - Channels
-  - `make`
   - Unbuffered Channels
   - Buffered Channels
+
+### Errors
 
 ### Operating System
 
