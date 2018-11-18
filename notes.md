@@ -19,16 +19,22 @@
 - Short Variable Declarations
   - Type Inference
 
+[[↑] Back to top](#golang-notes)
+
 ## Pointers
 
 - `*T`
 - `&`
 - `*`
 
+[[↑] Back to top](#golang-notes)
+
 ## Flow Control
 
 - `defer`
   - Stacking defers
+
+[[↑] Back to top](#golang-notes)
 
 ## Composite Types
 
@@ -43,10 +49,14 @@
 - Structs
   - Struct Literals
 
+[[↑] Back to top](#golang-notes)
+
 ## Functions
 
 - Value Argument
 - Pointer Argument
+
+[[↑] Back to top](#golang-notes)
 
 ## Type System
 
@@ -63,6 +73,8 @@
   - Exported
   - Unexported
 
+[[↑] Back to top](#golang-notes)
+
 ## Concurrency
 
 - Goroutines
@@ -77,11 +89,17 @@
   - Unbuffered Channels
   - Buffered Channels
 
+[[↑] Back to top](#golang-notes)
+
 ## Packages
 
 - `import`
 
+[[↑] Back to top](#golang-notes)
+
 ## Testing
+
+[[↑] Back to top](#golang-notes)
 
 ## Others
 
@@ -90,3 +108,5 @@
 - CPU
 - Threads
 - Queues
+
+[[↑] Back to top](#golang-notes)
