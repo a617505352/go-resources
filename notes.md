@@ -1,10 +1,14 @@
 <h1 align="center">Golang Notes</h1>
 
-- [Variables](#variables)
-- [Pointers](#pointers)
-- [Flow Control](#flow-control)
+- [Program Structure](#programstructure)
+  - [Variables](#variables)
+  - [Type Declarations](#typedeclarations)
+  - [Scope](#scope)
+- [Basic Data Types](#basicdatatypes)
 - [Composite Types](#composite-types)
 - [Functions](#functions)
+- [Pointers](#pointers)
+- [Flow Control](#flow-control)
 - [Type System](#type-system)
 - [Concurrency](#concurrency)
 - [Packages](#packages)
@@ -12,7 +16,9 @@
 - [Others](#others)
   - [Operating System](#operating-system)
 
-## Variables
+## Program Structure
+
+### Variables
 
 - `var`
   - Zero Values
@@ -21,20 +27,23 @@
 
 [[↑] Back to top](#golang-notes)
 
-## Pointers
+### Type Declarations
 
-- `*T`
-- `&`
-- `*`
+> type name underlying-type
 
 [[↑] Back to top](#golang-notes)
 
-## Flow Control
+### Scope
 
-- `defer`
-  - Stacking defers
+The scope of a declaration is a region of the program text; it is a compile-time property.
+
+Lexical blocks
+
+Universe block
 
 [[↑] Back to top](#golang-notes)
+
+## Basic Data Types
 
 ## Composite Types
 
@@ -55,6 +64,21 @@
 
 - Value Argument
 - Pointer Argument
+
+[[↑] Back to top](#golang-notes)
+
+## Pointers
+
+- `*T`
+- `&`
+- `*`
+
+[[↑] Back to top](#golang-notes)
+
+## Flow Control
+
+- `defer`
+  - Stacking defers
 
 [[↑] Back to top](#golang-notes)
 

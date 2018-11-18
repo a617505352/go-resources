@@ -8,8 +8,8 @@
 
 - [Notes](https://github.com/LIYINGZHEN/learning-go/blob/master/notes.md)
 
-## Books
+## Resources
 
-- [The Go Programming Language](https://www.gopl.io)
-- [A Tour of Go](https://tour.golang.org/list)
-- [Go in Action](https://www.manning.com/books/go-in-action)
+- [ ] [The go programming language](https://www.gopl.io)
+- [ ] [Go in action](https://www.manning.com/books/go-in-action)
+- [x] [A tour of go](https://tour.golang.org/list)
