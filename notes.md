@@ -10,6 +10,7 @@
   - [Slices](#slices)
   - [Maps](#maps)
   - [Structs](#structs)
+  - [JSON](#json)
 - [Functions](#functions)
 - [Pointers](#pointers)
 - [Flow Control](#flow-control)
@@ -89,9 +90,26 @@ x = append(x, 1)
 
 ### Maps
 
+In Go, a map is a reference to a hash table.
+
+```go
+make(map[K]V)
+// Map Literal
+map[K]V{}
+```
+
 [[↑] Back to top](#golang-notes)
 
 ### Structs
+
+A struct is an aggregate data type that groups together zero or more named values of arbitrary types as a single entity.
+
+```go
+// Struct Literals
+type Point struct{ X, Y int }
+```
+
+### JSON
 
 [[↑] Back to top](#golang-notes)
 
