@@ -111,14 +111,49 @@ type Point struct{ X, Y int }
 
 ### JSON
 
+Converting a Go data structure like movies to JSON is called marshaling.
+
+```go
+data, err := json.MarshalIndent(movies, "", "    ")
+
+if err != nil {
+    log.Fatalf("JSON marshaling failed: %s", err)
+}
+
+fmt.Printf("%s\n", data)
+```
+
+A ﬁeld tag is a string of m associated at compile time with the ﬁeld of a struct.
+
+```go
+Year int `json:"released"`
+Color bool `json:"color,omitempty"`
+```
+
+`json.Unmarshal`
+
+Unmarshal parses the JSON-encoded data and stores the result in the value pointed to by v.
+
+```go
+if err := json.Unmarshal(byt, &dat); err != nil {
+    panic(err)
+}
+fmt.Println(dat)
+```
+
 [[↑] Back to top](#golang-notes)
 
 ## Functions
 
-- Value Argument
-- Pointer Argument
+### Function Declarations
 
-[[↑] Back to top](#golang-notes)
+```go
+func name (parameter-list) (result-list) {
+    body
+}
+```
+
+Arguments are passed by value, so the function receives a copy of each argument; modiﬁcations to the copy do not affect the caller. However, if the argument contains some kind of reference, like a pointer, slice, map, function, or channel, then the caller may be affected by any modiﬁcations the function makes to variables indirectly referred to by the argument.
 
 ## Pointers
 
