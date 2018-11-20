@@ -1,11 +1,15 @@
 <h1 align="center">Golang Notes</h1>
 
-- [Program Structure](#programstructure)
+- [Program Structure](#program-tructure)
   - [Variables](#variables)
-  - [Type Declarations](#typedeclarations)
+  - [Type Declarations](#type-declarations)
   - [Scope](#scope)
-- [Basic Data Types](#basicdatatypes)
+- [Basic Data Types](#basic-data-types)
 - [Composite Types](#composite-types)
+  - [Arrays](#arrays)
+  - [Slices](#slices)
+  - [Maps](#maps)
+  - [Structs](#structs)
 - [Functions](#functions)
 - [Pointers](#pointers)
 - [Flow Control](#flow-control)
@@ -45,18 +49,49 @@ Universe block
 
 ## Basic Data Types
 
+- Integers
+- Floating-Point Numbers
+- Complex Numbers
+- Booleans
+- Strings
+- Constants
+
+[[↑] Back to top](#golang-notes)
+
 ## Composite Types
 
-- Arrays
-- Slices
-  - Slice Literals
-  - Length
-  - Capacity
-  - Append
-- Maps
-  - Map Literals
-- Structs
-  - Struct Literals
+### Arrays
+
+```go
+[n]T
+```
+
+An array is a ﬁxed-length sequence of zero or more elements of a particular type. Because of their ﬁxed length, arrays are rarely used directly in Go. Slices, which can grow and shrink, are much more versatile.
+
+[[↑] Back to top](#golang-notes)
+
+### Slices
+
+```go
+[]T
+```
+
+Slices represent variable-length sequences whose elements all have the same type.
+
+**Append**
+
+```go
+var x []int
+x = append(x, 1)
+```
+
+[[↑] Back to top](#golang-notes)
+
+### Maps
+
+[[↑] Back to top](#golang-notes)
+
+### Structs
 
 [[↑] Back to top](#golang-notes)
 
