@@ -2,6 +2,7 @@
 
 - [Program Structure](#program-tructure)
   - [Variables](#variables)
+  - [Pointers](#pointers)
   - [Type Declarations](#type-declarations)
   - [Scope](#scope)
 - [Basic Data Types](#basic-data-types)
@@ -12,11 +13,11 @@
   - [Structs](#structs)
   - [JSON](#json)
 - [Functions](#functions)
-- [Pointers](#pointers)
-- [Flow Control](#flow-control)
-- [Type System](#type-system)
-- [Concurrency](#concurrency)
-- [Packages](#packages)
+- [Methods](#methods)
+- [Interfaces](#interfaces)
+- [Goroutines and Channels](#goroutines-and-channels)
+- [Concurrency with Shared Variables](#concurrency-with-shared-variables)
+- [Packages and the Go Tool](#packages-and-the-go-tool)
 - [Testing](#testing)
 - [Others](#others)
   - [Operating System](#operating-system)
@@ -25,10 +26,25 @@
 
 ### Variables
 
-- `var`
-  - Zero Values
-- Short Variable Declarations
-  - Type Inference
+```go
+var name type = expression
+```
+
+Variables declared without a corresponding initialization are zero-valued.
+
+#### Short Variable Declarations
+
+```go
+name := expression
+```
+
+[[↑] Back to top](#golang-notes)
+
+### Pointers
+
+- `*T`
+- `&`
+- `*`
 
 [[↑] Back to top](#golang-notes)
 
@@ -155,39 +171,29 @@ func name (parameter-list) (result-list) {
 
 Arguments are passed by value, so the function receives a copy of each argument; modiﬁcations to the copy do not affect the caller. However, if the argument contains some kind of reference, like a pointer, slice, map, function, or channel, then the caller may be affected by any modiﬁcations the function makes to variables indirectly referred to by the argument.
 
-## Pointers
+[[↑] Back to top](#golang-notes)
 
-- `*T`
-- `&`
-- `*`
+## Methods
+
+A method is a function associated with a particular type.
+
+### Methods with a Pointer Receiver
+
+Because calling a function makes a copy of each argument value, if a function needs to update a variable, or if an argument is so large that we wish to avoid copying it, we must pass the address of the variable using a pointer. The same goes for methods that need to update the receiver variable: we attach them to the pointer type.
+
+### Composing Types by Struct Embedding
 
 [[↑] Back to top](#golang-notes)
 
-## Flow Control
-
-- `defer`
-  - Stacking defers
+## Interfaces
 
 [[↑] Back to top](#golang-notes)
 
-## Type System
-
-- Methods
-  - Value Receivers
-  - Pointer Receivers
-- Interfaces
-  - Empty interface
-  - Method Sets
-  - Polymorphism
-- Type Embedding
-  - Inner Type Promotion
-- Identifiers
-  - Exported
-  - Unexported
+## Goroutines and Channels
 
 [[↑] Back to top](#golang-notes)
 
-## Concurrency
+## Concurrency with Shared Variables
 
 - Goroutines
   - Select
@@ -203,7 +209,7 @@ Arguments are passed by value, so the function receives a copy of each argument;
 
 [[↑] Back to top](#golang-notes)
 
-## Packages
+## Packages and the Go Tool
 
 - `import`
 
