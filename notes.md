@@ -187,6 +187,20 @@ Because calling a function makes a copy of each argument value, if a function ne
 
 ## Interfaces
 
+Interface types express generalizations or abstractions about the behaviors of other types.
+
+### Interfaces as Contracts
+
+An interface is an abstract type. It doesn’t expose the representation or internal structure of its values, or the set of basic operations they support; it reveals only some of their methods. When you have a value of an interface type, you know nothing about what it is; you know only what it can do, or more precisely, what behaviors are provided by its methods.
+
+### Interface Types
+
+An interface type speciﬁes a set of methods that a concrete type must possess to be considered an instance of that interface.
+
+### Interface Values
+
+Conceptually, a value of an interface type, or interface value, has two components, a concrete type and a value of that type. These are called the interface’s dynamic type and dynamic value.
+
 [[↑] Back to top](#golang-notes)
 
 ## Goroutines and Channels
