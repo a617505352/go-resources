@@ -11,6 +11,7 @@
 ## Resources
 
 - [ ] [The go programming language](https://www.gopl.io)
+- [ ] [Golangbot.com](https://golangbot.com/)
 - [ ] [Go in action](https://www.manning.com/books/go-in-action)
 - [x] [A tour of go](https://tour.golang.org/list)
 - [x] [Go by Example](https://gobyexample.com/)

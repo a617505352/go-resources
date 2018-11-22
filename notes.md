@@ -18,11 +18,25 @@
 
 ## Variables
 
+Variable is the name given to a memory location to store a value of a specific type. There are various syntaxes to declare variables in go.
+
+### Declaring a single variable
+
 ```go
-var name type = expression
+var name type
 ```
 
-Variables declared without a corresponding initialization are zero-valued.
+### Declaring a variable with initial value
+
+```
+var name type = initialvalue
+```
+
+### Multiple variable declaration
+
+```
+var name1, name2 type = initialvalue1, initialvalue2
+```
 
 ### Short Variable Declarations
 
@@ -32,9 +46,21 @@ name := expression
 
 ## Pointers
 
-- `*T`
-- `&`
-- `*`
+### What is a pointer
+
+A pointer is a variable which stores the memory address of another variable.
+
+### Declaring pointers
+
+`*T` is the type of the pointer variable which points to a value of type `T`.
+
+### Get get the address of a variable
+
+The `&` operator is used to get the address of a variable.
+
+### Dereferencing a pointer
+
+Dereferencing a pointer means accessing the value of the variable which the pointer points to. `*a` is the syntax to deference a.
 
 ## Type Declarations
 
@@ -58,6 +84,10 @@ Universe block
 - Booleans
 - Strings
 - Constants
+
+## Type Conversion
+
+`T(v)` is the syntax to convert a value v to type T
 
 [[↑] Back to top](#golang-notes)
 
@@ -141,15 +171,33 @@ fmt.Println(dat)
 
 # Functions
 
+## What is a function?
+
+A function is a block of code that performs a specific task. A function takes a input, performs some calculations on the input and generates a output.
+
 ## Function Declarations
 
 ```go
-func name (parameter-list) (result-list) {
-    body
+func functionname(parametername type) returntype {  
+ // function body
 }
 ```
 
 Arguments are passed by value, so the function receives a copy of each argument; modiﬁcations to the copy do not affect the caller. However, if the argument contains some kind of reference, like a pointer, slice, map, function, or channel, then the caller may be affected by any modiﬁcations the function makes to variables indirectly referred to by the argument.
+
+## Blank Identifier
+
+`_` is know as the blank identifier in Go. It can be used in place of any value of any type.
+
+## Variadic Functions
+
+### What is a variadic function?
+
+A variadic function is a function that can accept variable number of arguments.
+
+### Syntax
+
+If the last parameter of a function is denoted by `...T`, then the function can accept any number of arguments of type `T` for the last parameter.
 
 # Methods
 
@@ -165,19 +213,17 @@ Because calling a function makes a copy of each argument value, if a function ne
 
 # Interfaces
 
-Interface types express generalizations or abstractions about the behaviors of other types.
+## What is an interface?
 
-## Interfaces as Contracts
-
-An interface is an abstract type. It doesn’t expose the representation or internal structure of its values, or the set of basic operations they support; it reveals only some of their methods. When you have a value of an interface type, you know nothing about what it is; you know only what it can do, or more precisely, what behaviors are provided by its methods.
-
-## Interface Types
-
-An interface type speciﬁes a set of methods that a concrete type must possess to be considered an instance of that interface.
+Interface specifies what methods a type should have and the type decides how to implement these methods.
 
 ## Interface Values
 
 Conceptually, a value of an interface type, or interface value, has two components, a concrete type and a value of that type. These are called the interface’s dynamic type and dynamic value.
+
+## Empty Interface
+
+An interface which has zero methods is called empty interface. It is represented as `interface{}`. Since the empty interface has zero methods, all types implement the empty interface.
 
 [[↑] Back to top](#golang-notes)
 
