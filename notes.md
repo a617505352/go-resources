@@ -12,7 +12,6 @@
 - [Testing](#testing)
 - [Reflection](#reflection)
 - [Others](#others)
-  - [Operating System](#operating-system)
 
 # Program Structure
 
@@ -28,15 +27,25 @@ var name type
 
 ### Declaring a variable with initial value
 
-```
+```go
 var name type = initialvalue
 ```
 
 ### Multiple variable declaration
 
-```
+```go
 var name1, name2 type = initialvalue1, initialvalue2
 ```
+
+### Zero values
+
+Variables declared without an explicit initial value are given their zero value.
+
+The zero value is:
+
+- `0` for numeric types
+- `false` for the boolean type
+- `""` (the empty string) for strings
 
 ### Short Variable Declarations
 
@@ -62,17 +71,39 @@ The `&` operator is used to get the address of a variable.
 
 Dereferencing a pointer means accessing the value of the variable which the pointer points to. `*a` is the syntax to deference a.
 
+```go
+var x int = 1
+var y int
+var ip *int // ip is pointer to int
+
+ip = &x     // ip now points to x
+y = *ip     // y is now 1
+```
+
 ## Type Declarations
 
-> type name underlying-type
+```go
+type name underlying-type
+```
 
 ## Scope
 
-The scope of a declaration is a region of the program text; it is a compile-time property.
+The places in code where a variable can be accessed.
 
-Lexical blocks
+### Blocks
 
-Universe block
+A sequence of declarations and statements within matching brackets, `{}`
+
+#### Implicit Blocks
+
+- Universe bloack - all Go source
+- Packageblock - all source in a package
+- File block - all source in a file
+- `if`, `for`, `switch` ...
+
+### Lexical Scoping
+
+Lexical Scoping defines how variable names are resolved in nested functions. Other names of Lexical Scoping are Static Scoping or Closure. It means that the scope of an inner function contains the scope of a parent function.
 
 [[↑] Back to top](#golang-notes)
 
@@ -83,9 +114,24 @@ Universe block
 - Complex Numbers
 - Booleans
 - Strings
-- Constants
 
-## Type Conversion
+## Constants
+
+### The Constant Generator _iota_
+
+```go
+const (
+    Sunday Weekday = iota
+    Monday
+    Tuesday
+    Wednesday
+    Thursday
+    Friday
+    Saturday
+)
+```
+
+## Type Conversions
 
 `T(v)` is the syntax to convert a value v to type T
 
@@ -580,6 +626,14 @@ import (
 import _ "image/png" // register PNG decoder
 ```
 
+## The Go Tool
+
+The go tool combines the features of a diverse set of tools into one command set.
+
+```bash
+go
+```
+
 [[↑] Back to top](#golang-notes)
 
 # Testing
@@ -613,6 +667,92 @@ Reflection is the ability of a program to inspect its variables and values at ru
 [[↑] Back to top](#golang-notes)
 
 # Others
+
+## Stack vs. Heap
+
+### Stack
+
+Stack is dedicated to function calls.
+
+- Local variables are stored here
+- Deallocated after unction complete
+
+### Heap
+
+Heap is persistent
+
+## Garbage Collection
+
+- Go is a compiled language which enables garbage collection
+- Implementation is fast
+- The compiler determines stack vs heap
+- Garbage collection in the background
+
+## Control Flows
+
+### For loop
+
+```go
+for initialization; condition; update {
+    // zero or more statements
+}
+```
+
+```go
+// a traditional "while" loop
+for condition {
+    // ...
+}
+```
+
+```go
+// inﬁnite loop
+for {
+    // ...
+}
+```
+
+### Switch/Case
+
+```go
+switch coinflip() {
+	case "heads":
+		heads++
+	case "tails":
+		tails++
+	default:
+		fmt.Println("landed on edge!")
+}
+```
+
+```go
+// tagless switch
+func Signum(x int) int {
+    switch {
+        case x > 0:
+            return +1
+        default: return 0
+            case x < 0:
+        return -1
+    }
+}
+```
+
+## Comments
+
+- Single-line comments
+
+```go
+// This is a comment
+var x int // Another comment
+```
+
+- Block comments
+
+```go
+/* Comment 1 Comment 2 */
+var x int
+```
 
 ## Operating System
 

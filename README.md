@@ -13,5 +13,6 @@
 - [ ] [The go programming language](https://www.gopl.io)
 - [ ] [Golangbot.com](https://golangbot.com/learn-golang-series/)
 - [ ] [Go in action](https://www.manning.com/books/go-in-action)
+- [ ] [Programming with Google Go](https://www.coursera.org/specializations/google-golang)
 - [x] [A tour of go](https://tour.golang.org/list)
 - [x] [Go by Example](https://gobyexample.com/)
