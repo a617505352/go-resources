@@ -141,21 +141,59 @@ const (
 
 ## Arrays
 
+An array is a **ﬁxed-length** sequence of zero or more elements of a particular type.
+
 ```go
-[n]T
+// [n]T
+var x [5]int
 ```
 
-An array is a ﬁxed-length sequence of zero or more elements of a particular type. Because of their ﬁxed length, arrays are rarely used directly in Go. Slices, which can grow and shrink, are much more versatile.
+### Array Literal
+
+```go
+// [n]T{element1, element2}
+var x [5]int{1, 2, 3, 4, 5}
+```
+
+### Interating Through Arrays
+
+```go
+x := [3]int {1, 2, 3}
+
+for i, v range x {
+    fmt.Printf("index %d, value %d", i, v)
+}
+```
 
 ## Slices
 
+A "window" on an underlying array.
+
+- `Pointer` indicate the start of the slice
+- `Length` is the number of elements in the clice
+- `Capacity` is the maximum number of elements
+
 ```go
-[]T
+// []T
+var x []int
 ```
 
-Slices represent variable-length sequences whose elements all have the same type.
+### Slice Literal
 
-**Append**
+```go
+var x []int{1, 2, 3, 4, 5}
+```
+
+### Make
+
+The make built-in function allocates and initializes an object of type slice, map, or chan (only).
+
+```go
+person := make(map[string]string)
+receiver := make(chan string)
+```
+
+### Append
 
 ```go
 var x []int
@@ -167,8 +205,12 @@ x = append(x, 1)
 In Go, a map is a reference to a hash table.
 
 ```go
-make(map[K]V)
-// Map Literal
+idMap := make(map[K]V)
+```
+
+### Map Literal
+
+```go
 map[K]V{}
 ```
 
@@ -176,41 +218,80 @@ map[K]V{}
 
 A struct is an aggregate data type that groups together zero or more named values of arbitrary types as a single entity.
 
+### Struct Literal
+
 ```go
-// Struct Literals
-type Point struct{ X, Y int }
+type struct Person {
+    firstName string
+    lastName
+}
+
+max := Person{
+    firstName: "max",
+    lastName: "Li"
+}
 ```
 
 ## JSON
 
 Converting a Go data structure like movies to JSON is called marshaling.
 
-```go
-data, err := json.MarshalIndent(movies, "", "    ")
+### JSON Marshalling
 
-if err != nil {
-    log.Fatalf("JSON marshaling failed: %s", err)
+```go
+type person struct {
+    Name  string
+    Addr  string
+    Phone string
 }
 
-fmt.Printf("%s\n", data)
+p1 := person{
+    Name:  "joe",
+    Addr:  "a st.",
+    Phone: "123",
+}
+
+barr, err := json.Marshal(p1)
+if err != nil {
+    panic(err)
+}
+
+fmt.Print(string(barr))
 ```
+
+### JSON Unmarshalling
+
+```go
+type person struct {
+    Name  string
+    Addr  string
+    Phone string
+}
+
+byt := []byte(`
+    {
+        "Name":"joe",
+        "Addr":"a st.",
+        "Phone":"123"
+    }
+`)
+data := person{}
+
+err := json.Unmarshal(byt, &data)
+if err != nil {
+    panic(err)
+}
+
+fmt.Println(data)
+```
+
+### ﬁeld tag
 
 A ﬁeld tag is a string of m associated at compile time with the ﬁeld of a struct.
 
 ```go
 Year int `json:"released"`
 Color bool `json:"color,omitempty"`
-```
-
-`json.Unmarshal`
-
-Unmarshal parses the JSON-encoded data and stores the result in the value pointed to by v.
-
-```go
-if err := json.Unmarshal(byt, &dat); err != nil {
-    panic(err)
-}
-fmt.Println(dat)
 ```
 
 [[↑] Back to top](#golang-notes)
@@ -229,7 +310,21 @@ func functionname(parametername type) returntype {
 }
 ```
 
-Arguments are passed by value, so the function receives a copy of each argument; modiﬁcations to the copy do not affect the caller. However, if the argument contains some kind of reference, like a pointer, slice, map, function, or channel, then the caller may be affected by any modiﬁcations the function makes to variables indirectly referred to by the argument.
+## Call by Value vs. Reference
+
+### Call by Value
+
+- Passed arguments are copied to parameters.
+- Modifying parameter has no effect outside the function.
+
+### Call by Reference
+
+- Programmer can pass a pointer as an argument.
+- Called function has direct access to caller viable in memory.
+
+### Function Complexity
+
+- Function length is the most obvious measure
 
 ## Blank Identifier
 
@@ -237,13 +332,34 @@ Arguments are passed by value, so the function receives a copy of each argument;
 
 ## Variadic Functions
 
-### What is a variadic function?
-
 A variadic function is a function that can accept variable number of arguments.
 
-### Syntax
+```go
+func getMax(vals ...int) int {
+	maxV := -1
+	for _, v := range vals {
+		if v > maxV {
+			maxV = v
+		}
+	}
+	return maxV
+}
 
-If the last parameter of a function is denoted by `...T`, then the function can accept any number of arguments of type `T` for the last parameter.
+func main() {
+	res := getMax(1, 2, 3, 4, 5)
+	fmt.Println(res)
+}
+```
+
+### Variadic Slice Argument
+
+```go
+func main() {
+	vslice := []int{1, 2, 3, 4, 5}
+	res := getMax(vslice...)
+	fmt.Println(res)
+}
+```
 
 ## Deferred Function Calls
 
@@ -252,44 +368,11 @@ If the last parameter of a function is denoted by `...T`, then the function can 
 Defer statement is used to execute a function call just before the function where the defer statement is present returns.
 
 ```go
-package main
-
-import (
-	"fmt"
-	"sync"
-)
-
-type rect struct {
-	length int
-	width  int
-}
-
-func (r rect) area(wg *sync.WaitGroup) {
-	defer wg.Done()
-	if r.length < 0 {
-		fmt.Printf("rect %v's length should be greater than zero\n", r)
-		return
-	}
-	if r.width < 0 {
-		fmt.Printf("rect %v's width should be greater than zero\n", r)
-		return
-	}
-	area := r.length * r.width
-	fmt.Printf("rect %v's area %d\n", r, area)
-}
-
 func main() {
-	var wg sync.WaitGroup
-	r1 := rect{-67, 89}
-	r2 := rect{5, -67}
-	r3 := rect{8, 9}
-	rects := []rect{r1, r2, r3}
-	for _, v := range rects {
-		wg.Add(1)
-		go v.area(&wg)
-	}
-	wg.Wait()
-	fmt.Println("All go routines finished executing")
+	i := 1
+	defer fmt.Println(i + 1)
+	i++
+	fmt.Println("Hello!")
 }
 ```
 
@@ -306,6 +389,99 @@ One important factor is that you should avoid panic and recover and use errors w
 ## Recover
 
 recover is a builtin function which is used to regain control of a panicking goroutine.
+
+## Functions are First-class
+
+- Functuns can be treated like other types
+
+### Variables as Functions
+
+```go
+var funcVar func(int) int
+
+func incFn(x int) int {
+	return x + 1
+}
+
+func main() {
+	funcVar = incFn
+	fmt.Print(funcVar(1))
+}
+```
+
+### Functions as Arguments
+
+```go
+func applyIt(afunct func(int) int, val int) int {
+	return afunct(val)
+}
+
+func incFn(x int) int { return x + 1 }
+func decFn(x int) int { return x - 1 }
+
+func main() {
+	fmt.Println(applyIt(incFn, 2))
+	fmt.Println(applyIt(decFn, 2))
+}
+```
+
+### Anonymous Functions
+
+```go
+func applyIt(afunct func(int) int, val int) int {
+	return afunct(val)
+}
+
+func main() {
+	v := applyIt(func(x int) int { return x + 1 }, 2)
+	fmt.Println(v)
+}
+```
+
+### Functions as Return Values
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func add(x int) func(int) int {
+	return func(y int) int {
+		return x + y
+	}
+}
+
+func main() {
+	var add2 = add(2)
+	fmt.Println(add2(3))
+}
+```
+
+### Closure
+
+- Function + its environment
+- When functions are passed/returned, their environment comes with them
+
+## Guidelines for Functions
+
+### Function Naming
+
+- Give functions a good name
+- Behavior can be understood at a glance
+- Parameter naming counts too
+
+### Functional Cohesion
+
+- Functions should perform only one "operation"
+- An "operation" depends on the context
+
+### Few Parameters
+
+- Debugging requires tracing function input data
+- More difficult with a large number of parameters
+- Function may have bad functional cohesion
 
 [[↑] Back to top](#golang-notes)
 

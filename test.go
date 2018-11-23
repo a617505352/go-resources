@@ -1,8 +1,10 @@
-switch coinflip() {
-	case "heads":
-		heads++
-	case "tails":
-		tails++
-	default:
-		fmt.Println("landed on edge!")
+package main
+
+import "fmt"
+
+func main() {
+	i := 1
+	defer fmt.Println(i + 1)
+	i++
+	fmt.Println("Hello!")
 }
