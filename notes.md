@@ -178,7 +178,7 @@ A function is a block of code that performs a specific task. A function takes a 
 ## Function Declarations
 
 ```go
-func functionname(parametername type) returntype {  
+func functionname(parametername type) returntype {
  // function body
 }
 ```
@@ -198,6 +198,70 @@ A variadic function is a function that can accept variable number of arguments.
 ### Syntax
 
 If the last parameter of a function is denoted by `...T`, then the function can accept any number of arguments of type `T` for the last parameter.
+
+## Deferred Function Calls
+
+### What is Defer?
+
+Defer statement is used to execute a function call just before the function where the defer statement is present returns.
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+type rect struct {
+	length int
+	width  int
+}
+
+func (r rect) area(wg *sync.WaitGroup) {
+	defer wg.Done()
+	if r.length < 0 {
+		fmt.Printf("rect %v's length should be greater than zero\n", r)
+		return
+	}
+	if r.width < 0 {
+		fmt.Printf("rect %v's width should be greater than zero\n", r)
+		return
+	}
+	area := r.length * r.width
+	fmt.Printf("rect %v's area %d\n", r, area)
+}
+
+func main() {
+	var wg sync.WaitGroup
+	r1 := rect{-67, 89}
+	r2 := rect{5, -67}
+	r3 := rect{8, 9}
+	rects := []rect{r1, r2, r3}
+	for _, v := range rects {
+		wg.Add(1)
+		go v.area(&wg)
+	}
+	wg.Wait()
+	fmt.Println("All go routines finished executing")
+}
+```
+
+## Panic
+
+### What is panic?
+
+`panic` and `recover` can be considered similar to try-catch-finally idiom in other languages except that it is rarely used and when used is more elegant and results in clean code.
+
+### When should panic be used?
+
+One important factor is that you should avoid panic and recover and use errors where ever possible. Only in cases where the program just cannot continue execution should a panic and recover mechanism be used.
+
+## Recover
+
+recover is a builtin function which is used to regain control of a panicking goroutine.
+
+[[↑] Back to top](#golang-notes)
 
 # Methods
 
@@ -224,6 +288,102 @@ Conceptually, a value of an interface type, or interface value, has two componen
 ## Empty Interface
 
 An interface which has zero methods is called empty interface. It is represented as `interface{}`. Since the empty interface has zero methods, all types implement the empty interface.
+
+## The error Interface
+
+```go
+type error interface {
+    Error() string
+}
+```
+
+## Polymorphism
+
+A variable of type interface can hold any value which implements the interface. This property of interfaces is used to achieve polymorphism in Go.
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+type Income interface {
+	calculate() int
+	source() string
+}
+
+type FixedBilling struct {
+	projectName  string
+	biddedAmount int
+}
+
+type TimeAndMaterial struct {
+	projectName string
+	noOfHours   int
+	hourlyRate  int
+}
+
+type Advertisement struct {
+	adName     string
+	CPC        int
+	noOfClicks int
+}
+
+func (fb FixedBilling) calculate() int {
+	return fb.biddedAmount
+}
+
+func (fb FixedBilling) source() string {
+	return fb.projectName
+}
+
+func (tm TimeAndMaterial) calculate() int {
+	return tm.noOfHours * tm.hourlyRate
+}
+
+func (tm TimeAndMaterial) source() string {
+	return tm.projectName
+}
+
+func (a Advertisement) calculate() int {
+	return a.CPC * a.noOfClicks
+}
+
+func (a Advertisement) source() string {
+	return a.adName
+}
+
+func calculateNetIncome(ic []Income) {
+	var netincome int
+	for _, income := range ic {
+		fmt.Printf("Income From %s = $%d\n", income.source(), income.calculate())
+		netincome += income.calculate()
+	}
+	fmt.Printf("Net income of organisation = $%d", netincome)
+}
+
+func main() {
+	project1 := FixedBilling{projectName: "Project 1", biddedAmount: 5000}
+	project2 := FixedBilling{projectName: "Project 2", biddedAmount: 10000}
+	project3 := TimeAndMaterial{projectName: "Project 3", noOfHours: 160, hourlyRate: 25}
+	bannerAd := Advertisement{adName: "Banner Ad", CPC: 2, noOfClicks: 500}
+	popupAd := Advertisement{adName: "Popup Ad", CPC: 5, noOfClicks: 750}
+	incomeStreams := []Income{project1, project2, project3, bannerAd, popupAd}
+	calculateNetIncome(incomeStreams)
+}
+```
+
+The above program will output,
+
+```
+Income From Project 1 = $5000
+Income From Project 2 = $10000
+Income From Project 3 = $4000
+Income From Banner Ad = $1000
+Income From Popup Ad = $3750
+Net income of organisation = $23750
+```
 
 [[↑] Back to top](#golang-notes)
 
@@ -260,11 +420,120 @@ ch := make(chan type)
 ch := make(chan type, capacity)
 ```
 
+## Looping in Parallel
+
+### WaitGroup
+
+A WaitGroup is used to wait for a collection of Goroutines to finish executing. The control is blocked until all Goroutines finish executing.
+
+```go
+package main
+
+import (
+    "fmt"
+    "sync"
+    "time"
+)
+
+func process(i int, wg *sync.WaitGroup) {
+    fmt.Println("started Goroutine ", i)
+    time.Sleep(2 * time.Second)
+    fmt.Printf("Goroutine %d ended\n", i)
+    wg.Done()
+}
+
+func main() {
+    no := 3
+    var wg sync.WaitGroup
+    for i := 0; i < no; i++ {
+        wg.Add(1)
+        go process(i, &wg)
+    }
+    wg.Wait()
+    fmt.Println("All go routines finished executing")
+}
+```
+
+**It is important to pass the address of wg in line no. 21. If the address is not passed, then each Goroutine will have its own copy of the WaitGroup and main will not be notified when they finish executing.**
+
+## Multiplexing with select
+
+### What is select?
+
+The select statement is used to choose from multiple send/receive channel operations.
+
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func server1(ch chan string) {
+    time.Sleep(6 * time.Second)
+    ch <- "from server1"
+}
+func server2(ch chan string) {
+    time.Sleep(3 * time.Second)
+    ch <- "from server2"
+
+}
+func main() {
+    output1 := make(chan string)
+    output2 := make(chan string)
+    go server1(output1)
+    go server2(output2)
+    select {
+    case s1 := <-output1:
+        fmt.Println(s1)
+    case s2 := <-output2:
+        fmt.Println(s2)
+    }
+}
+```
+
+### Default case
+
+The default case in a select statement is executed when none of the other case is ready. This is generally used to prevent the select statement from blocking.
+
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func process(ch chan string) {
+    time.Sleep(10500 * time.Millisecond)
+    ch <- "process successful"
+}
+
+func main() {
+    ch := make(chan string)
+    go process(ch)
+    for {
+        time.Sleep(1000 * time.Millisecond)
+        select {
+        case v := <-ch:
+            fmt.Println("received value: ", v)
+            return
+        default:
+            fmt.Println("no value received")
+        }
+    }
+
+}
+```
+
 [[↑] Back to top](#golang-notes)
 
 # Concurrency with Shared Variables
 
 ## Mutual Exclusion: sync.Mutex
+
+A Mutex is used to provide a locking mechanism to ensure that only one Goroutine is running the critical section of code at any point of time to prevent race condition from happening.
 
 ```go
 mutex.Lock()
@@ -315,7 +584,7 @@ import _ "image/png" // register PNG decoder
 
 # Testing
 
-## Test Functions
+## _Test_ Functions
 
 ```go
 func TestName(t *testing.T) {
@@ -323,7 +592,7 @@ func TestName(t *testing.T) {
 }
 ```
 
-## Benchmark Functions
+## _Benchmark_ Functions
 
 ```go
 func BenchmarkIsPalindrome(b *testing.B) {
@@ -336,6 +605,10 @@ func BenchmarkIsPalindrome(b *testing.B) {
 [[↑] Back to top](#golang-notes)
 
 # Reflection
+
+## What is reflection?
+
+Reflection is the ability of a program to inspect its variables and values at run time and find their type. You might not understand what this means but that's alright.
 
 [[↑] Back to top](#golang-notes)
 
