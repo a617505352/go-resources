@@ -1,10 +1,7 @@
 package main
 
-import "fmt"
-
-func main() {
-	i := 1
-	defer fmt.Println(i + 1)
-	i++
-	fmt.Println("Hello!")
+func main () {
+	func (p *Point) OffsetX(v int) {
+    p.x = p.x + v
+	}
 }

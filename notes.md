@@ -489,9 +489,78 @@ func main() {
 
 A method is a function associated with a particular type.
 
+```go
+package main
+
+import "fmt"
+
+type myInt int
+
+func (mi myInt) double() int {
+	return int(mi * 2)
+}
+
+func main() {
+    v := myInt(3)
+    // call by value
+	fmt.Println(v.double())
+}
+```
+
+## Controlling Access to Structs
+
+```go
+package data
+
+// Point struct
+type Point struct {
+	x float64
+	y float64
+}
+
+// InitMe initialize value
+func (p *Point) InitMe(xn, yn float64) {
+	p.x = xn
+	p.y = xn
+}
+```
+
+```go
+package main
+
+import "data"
+
+func main () {
+	var p data.Point
+	p.initMe(3, 4)
+}
+```
+
 ## Methods with a Pointer Receiver
 
-Because calling a function makes a copy of each argument value, if a function needs to update a variable, or if an argument is so large that we wish to avoid copying it, we must pass the address of the variable using a pointer. The same goes for methods that need to update the receiver variable: we attach them to the pointer type.
+- The receiver can be a pointer to a type.
+- Call by reference, pointer is passed to the method.
+
+### No Need to Reference
+
+```go
+p := Point(3, 4)
+p.OffsetX(5)
+fmt.Println(p.x)
+```
+
+- Do not need to reference when calling the method.
+
+### No Need to Dereference
+
+```go
+func (p *Point) OffsetX(v int) {
+    p.x = p.x + v
+}
+```
+
+- Point is referenced as p, not \*p.
+- Dereferencing is automatic with `.` operator.
 
 ## Composing Types by Struct Embedding
 
@@ -499,19 +568,50 @@ Because calling a function makes a copy of each argument value, if a function ne
 
 # Interfaces
 
-## What is an interface?
-
 Interface specifies what methods a type should have and the type decides how to implement these methods.
 
-## Interface Values
+## Interface vs. Concrete Types
 
-Conceptually, a value of an interface type, or interface value, has two components, a concrete type and a value of that type. These are called the interface’s dynamic type and dynamic value.
+### Concrete Types
+
+- Specify the exact representation of the data and methods
+- Complete method implementation is included
+
+## Interface Types
+
+- Specifies some method signatures
+- Implementations are abstracted
+
+### Interface Values
+
+- Can be treated like other values
+
+### Interface values have two components
+
+1. Dynamic Type: Concrete type which it is assigned to
+2. Dynamic Value: value of the dynamic type
 
 ## Empty Interface
 
 An interface which has zero methods is called empty interface. It is represented as `interface{}`. Since the empty interface has zero methods, all types implement the empty interface.
 
+```go
+func PrintMe(val interface{}) {
+    fmt.PrintIn(val)
+}
+```
+
+## Nil Dynamic Type
+
+```
+var s1 Speaker
+```
+
+- Cannot call a method, runtime error
+
 ## The error Interface
+
+Many Go programs return error interface objects to indicate errors
 
 ```go
 type error interface {
@@ -521,7 +621,7 @@ type error interface {
 
 ## Polymorphism
 
-A variable of type interface can hold any value which implements the interface. This property of interfaces is used to achieve polymorphism in Go.
+A variable of type interface can hold any value which implements the interface.
 
 ```go
 package main
@@ -607,11 +707,59 @@ Income From Popup Ad = $3750
 Net income of organisation = $23750
 ```
 
+## Type Assertions
+
+- Type assertions can be used to detemine and extract the underlying concrete type.
+
+```go
+func DrawShape(s Shape2D) bool {
+    rect, ok := s.(Rectangle)
+    if ok {
+        DrawRect(rect)
+    }
+    tri, ok := s.(Triangle)
+    if ok {
+        DrawTri(tri)
+    }
+}
+```
+
+## Type Switch
+
+- Switch statement used with a type assertion
+
+```go
+func DrawShape (s Shape2D) bool {
+    switch sh := s.(type) {
+        case Rectangle:
+            DrawRact(sh)
+        case Triangle:
+            DrawTri(sh)
+    }
+}
+
+```
+
 [[↑] Back to top](#golang-notes)
 
 # Goroutines and Channels
 
 ## Goroutines
+
+- Like a thread in Go
+- Many Goroutines executes within a single OS thread
+
+![screen shot 2018-11-24 at 22 26 14](https://user-images.githubusercontent.com/11765228/48969328-271f5600-f038-11e8-985e-1b67e59c7667.png)
+
+## Go Runtime Scheduler
+
+- Schedules goroutines inside an OS thread
+- Like a little OS indie a single OS thread
+- Logical processor is mapped to a thread
+
+![screen shot 2018-11-24 at 22 26 51](https://user-images.githubusercontent.com/11765228/48969327-271f5600-f038-11e8-99be-cbf9138b4451.png)
+
+## Go Stateme
 
 A go stateme causes the function to be called in a newly created goroutine. The go statement itself completes immediately:
 
@@ -843,6 +991,34 @@ Reflection is the ability of a program to inspect its variables and values at ru
 [[↑] Back to top](#golang-notes)
 
 # Others
+
+## Parallel Execution
+
+Parallel operation means that two computations are literally running simultaneously - at the same time. At one point in time both computations are advanced. There is no taking turns, they are advanced at the same time.
+
+![48967958-2f20cb00-f023-11e8-80e0-32eff3ac4554](https://user-images.githubusercontent.com/11765228/48969447-95184d00-f039-11e8-876c-5c78adec5cc2.png)
+
+### Why Use Parallel Execution
+
+- Tasks may complete more quickly
+- Some tasks are parallelizable and some are not
+
+## Concurrent Execution
+
+Concurrent operation means that two computations can both make progress and advance regardless of the other. If there are two threads, for example, then both make progress independently. The second computation doesn't need to wait for the first one to complete before it can be advanced.
+
+![48967954-23350900-f023-11e8-9f20-ada1ca32ed0c](https://user-images.githubusercontent.com/11765228/48969448-96e21080-f039-11e8-8069-33379bd10ece.png)
+
+## Concurrent vs Parallel
+
+- Parallel tasks must be executed on different hardware
+- Concurrent tasks may be executed on the same hardware
+
+## Threads vs. Processes
+
+- Threads share some context
+- Many threads can exit in on process
+- OS Schedules threads rather than the processes
 
 ## Stack vs. Heap
 
