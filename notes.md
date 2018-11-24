@@ -768,33 +768,22 @@ f() // call f(); wait for it to return
 go f() // create a new goroutine that calls f(); don't wait
 ```
 
-## Channels
+## Exiting a Goroutin
 
-A channel is a communication mechanism that lets one goroutine send values to another goroutine.
-
-```go
-ch <- x // a send statement
-x = <-ch // a receive expression in an assignment statement
-<-ch // a receive statement; result is discarded
-```
-
-### Unbuffered Channels
-
-```go
-ch := make(chan type)
-```
-
-### Buffered Channels
-
-```go
-ch := make(chan type, capacity)
-```
-
-## Looping in Parallel
+- A goroutine exits when its code is complete
+- When the main gorount is complete, all others goroutines exit
 
 ### WaitGroup
 
-A WaitGroup is used to wait for a collection of Goroutines to finish executing. The control is blocked until all Goroutines finish executing.
+- Sync package contains functions to synchronize between goroutine
+- sync.WaitGroup force a goroutine to wait for other goroutines
+- Contains an internal counter
+
+```go
+wg.Add()  // increments the counter
+wg.Done() // decrements the counter
+wg.Wait() // blocks until counter === 0
+```
 
 ```go
 package main
@@ -825,6 +814,39 @@ func main() {
 ```
 
 **It is important to pass the address of wg in line no. 21. If the address is not passed, then each Goroutine will have its own copy of the WaitGroup and main will not be notified when they finish executing.**
+
+## Channels
+
+- Transfer data between goroutines
+- Use `make()` to creat a channel
+
+```go
+ch <- x // a send statement
+x = <-ch // a receive expression in an assignment statement
+<-ch // a receive statement; result is discarded
+```
+
+### Unbuffered Channels
+
+- Unbuffered channels cannot hold data in transit
+- Sending blocks until data is received
+- Receiving blocks until data is sent
+
+```go
+ch := make(chan type)
+```
+
+### Buffered Channels
+
+- Channels can contain a limited number of objects
+- Capacity is the number of objects it can hold in transit
+- Optional argument to make()defines channel capacity `c := make(chan int, 3)`
+- Sending only blocks if buffer is full
+- Receiving only blocks if buffer is empty
+
+```go
+ch := make(chan type, capacity)
+```
 
 ## Multiplexing with select
 

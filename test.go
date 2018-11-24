@@ -1,7 +1,17 @@
 package main
 
-func main () {
-	func (p *Point) OffsetX(v int) {
-    p.x = p.x + v
-	}
+import (
+	"fmt"
+)
+
+type test struct {
+}
+
+func (t *test) what(value int) {
+	fmt.Print("11")
+}
+
+func main() {
+	var wg test
+	wg.what(1)
 }
