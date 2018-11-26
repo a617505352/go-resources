@@ -1,3 +1,10 @@
+<h1 align="center">Reading Console Input</h1>
+
+- [Using Bufio’s Scanner](#using-bufios-scanner)
+
+# Using Bufio’s Scanner
+
+```go
 package main
 
 import (
@@ -12,3 +19,4 @@ func main() {
 		fmt.Println(scanner.Text())
 	}
 }
+```

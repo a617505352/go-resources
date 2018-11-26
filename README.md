@@ -8,6 +8,7 @@
 
 - [Fundamental](https://github.com/LIYINGZHEN/learning-go/blob/master/fundamental.md)
 - [Reading Writing Files](https://github.com/LIYINGZHEN/learning-go/blob/master/reading-writing-files.md)
+- [Reading in Console Input](https://github.com/LIYINGZHEN/learning-go/blob/master/reading-console-input)
 
 ## Resources
 
