@@ -1,26 +1,21 @@
 package main
 
-import (
-	"fmt"
-	"sync"
-)
-
-var wg sync.WaitGroup
-var on sync.Once
-
-func setup() {
-	fmt.Println("Init")
-}
-
-func doStuff() {
-	on.Do(setup)
-	fmt.Println("hello")
-	wg.Done()
-}
+import "fmt"
 
 func main() {
-	wg.Add(2)
-	go doStuff()
-	go doStuff()
-	wg.Wait()
+	// declare a variable, by default map will be nil
+	var countryCapitalMap map[string]string
+	// define the map as nil map can not be assigned any value
+	countryCapitalMap = make(map[string]string)
+	// map literal
+	countryCapitalMap2 := map[string]string{
+		"France": "Paris",
+		"Italy":  "Rome",
+		"Japan":  "Tokyo",
+		"India":  "New Delhi",
+	}
+	// delete() function is used to delete an entry from a map.
+	delete(countryCapitalMap2, "France")
+	fmt.Println(countryCapitalMap)
+	fmt.Println(countryCapitalMap2)
 }

@@ -15,25 +15,20 @@
 
 # Program Structure
 
+## Names
+
+In Go language, a name is exported if it starts with capital letter. Exported means the function or variable/constant is accessible to the importer of the respective package.
+
 ## Variables
 
 Variable is the name given to a memory location to store a value of a specific type. There are various syntaxes to declare variables in go.
 
-### Declaring a single variable
-
 ```go
+// Declaring a single variable
 var name type
-```
-
-### Declaring a variable with initial value
-
-```go
+// Declaring a variable with initial value
 var name type = initialvalue
-```
-
-### Multiple variable declaration
-
-```go
+// Multiple variable declaration
 var name1, name2 type = initialvalue1, initialvalue2
 ```
 
@@ -55,29 +50,21 @@ name := expression
 
 ## Pointers
 
-### What is a pointer
-
 A pointer is a variable which stores the memory address of another variable.
 
-### Declaring pointers
-
-`*T` is the type of the pointer variable which points to a value of type `T`.
-
-### Get get the address of a variable
-
-The `&` operator is used to get the address of a variable.
-
-### Dereferencing a pointer
-
-Dereferencing a pointer means accessing the value of the variable which the pointer points to. `*a` is the syntax to deference a.
+![pointer](https://user-images.githubusercontent.com/11765228/48991422-ceea7000-f16d-11e8-955d-d035380500e7.png)
 
 ```go
-var x int = 1
-var y int
-var ip *int // ip is pointer to int
+func main() {
+	variable := 20
+	// pointer to an integer
+	var pointer *int
+	// & -> get the address of a variable
+	pointer = &variable
+	// * -> get the value from a pointer variable
+	fmt.Println(*pointer)
+}
 
-ip = &x     // ip now points to x
-y = *ip     // y is now 1
 ```
 
 ## Type Declarations
@@ -144,8 +131,7 @@ const (
 An array is a **ﬁxed-length** sequence of zero or more elements of a particular type.
 
 ```go
-// [n]T
-var x [5]int
+var variable_name [SIZE] variable_type
 ```
 
 ### Array Literal
@@ -173,15 +159,19 @@ A "window" on an underlying array.
 - `Length` is the number of elements in the clice
 - `Capacity` is the maximum number of elements
 
-```go
-// []T
-var x []int
-```
-
-### Slice Literal
+![golang-slices-length-capacity](https://user-images.githubusercontent.com/11765228/48991986-9ac47e80-f170-11e8-9a79-cb0509d90c44.jpg)
 
 ```go
-var x []int{1, 2, 3, 4, 5}
+func main() {
+	// a slice of unspecified size
+	var numbers []int
+	// slice literal
+	x := []int{1, 2, 3, 4, 5}
+	// len() -> the elements presents in the slice
+	fmt.Println(len(numbers))
+	// cap() -> the capacity of the slice
+	fmt.Println(cap(x))
+}
 ```
 
 ### Make
@@ -205,30 +195,44 @@ x = append(x, 1)
 In Go, a map is a reference to a hash table.
 
 ```go
-idMap := make(map[K]V)
-```
-
-### Map Literal
-
-```go
-map[K]V{}
+func main() {
+	// declare a variable, by default map will be nil
+	var countryCapitalMap map[string]string
+	// define the map as nil map can not be assigned any value
+	countryCapitalMap = make(map[string]string)
+	// map literal
+	countryCapitalMap2 := map[string]string{
+		"France": "Paris",
+		"Italy":  "Rome",
+		"Japan":  "Tokyo",
+		"India":  "New Delhi",
+	}
+	// delete() function is used to delete an entry from a map.
+	delete(countryCapitalMap2, "France")
+	fmt.Println(countryCapitalMap)
+	fmt.Println(countryCapitalMap2)
+}
 ```
 
 ## Structs
 
 A struct is an aggregate data type that groups together zero or more named values of arbitrary types as a single entity.
 
-### Struct Literal
-
 ```go
-type struct Person {
-    firstName string
-    lastName
+// defining a structs
+type person struct {
+	name string
+	age  int
 }
 
-max := Person{
-    firstName: "max",
-    lastName: "Li"
+func main() {
+	// struct literal
+	max := person{
+		name: "max",
+		age:  24,
+	}
+	// accessing struct members
+	fmt.Println(max.name)
 }
 ```
 
@@ -298,19 +302,17 @@ Color bool `json:"color,omitempty"`
 
 # Functions
 
-## What is a function?
-
 A function is a block of code that performs a specific task. A function takes a input, performs some calculations on the input and generates a output.
 
-## Function Declarations
-
 ```go
-func functionname(parametername type) returntype {
- // function body
+func function_name( [parameter list] ) [return_types] {
+   // body of the function
 }
 ```
 
 ## Call by Value vs. Reference
+
+By default, Go uses call by value to pass arguments. In general, it means the code within a function cannot alter the arguments used to call the function.
 
 ### Call by Value
 
@@ -322,13 +324,16 @@ func functionname(parametername type) returntype {
 - Programmer can pass a pointer as an argument.
 - Called function has direct access to caller viable in memory.
 
-### Function Complexity
+## Error
 
-- Function length is the most obvious measure
-
-## Blank Identifier
-
-`_` is know as the blank identifier in Go. It can be used in place of any value of any type.
+```go
+func Sqrt(value float64)(float64, error) {
+   if(value < 0) {
+      return 0, errors.New("Math: negative number passed to Sqrt")
+   }
+   return math.Sqrt(value)
+}
+```
 
 ## Variadic Functions
 
@@ -363,8 +368,6 @@ func main() {
 
 ## Deferred Function Calls
 
-### What is Defer?
-
 Defer statement is used to execute a function call just before the function where the defer statement is present returns.
 
 ```go
@@ -377,8 +380,6 @@ func main() {
 ```
 
 ## Panic
-
-### What is panic?
 
 `panic` and `recover` can be considered similar to try-catch-finally idiom in other languages except that it is rarely used and when used is more elegant and results in clean code.
 
@@ -624,87 +625,43 @@ type error interface {
 A variable of type interface can hold any value which implements the interface.
 
 ```go
-package main
-
-import (
-	"fmt"
-)
-
-type Income interface {
-	calculate() int
-	source() string
+/* define an interface */
+type Shape interface {
+   area() float64
 }
 
-type FixedBilling struct {
-	projectName  string
-	biddedAmount int
+/* define a circle */
+type Circle struct {
+   x,y,radius float64
 }
 
-type TimeAndMaterial struct {
-	projectName string
-	noOfHours   int
-	hourlyRate  int
+/* define a rectangle */
+type Rectangle struct {
+   width, height float64
 }
 
-type Advertisement struct {
-	adName     string
-	CPC        int
-	noOfClicks int
+/* define a method for circle (implementation of Shape.area())*/
+func(circle Circle) area() float64 {
+   return math.Pi * circle.radius * circle.radius
 }
 
-func (fb FixedBilling) calculate() int {
-	return fb.biddedAmount
+/* define a method for rectangle (implementation of Shape.area())*/
+func(rect Rectangle) area() float64 {
+   return rect.width * rect.height
 }
 
-func (fb FixedBilling) source() string {
-	return fb.projectName
-}
-
-func (tm TimeAndMaterial) calculate() int {
-	return tm.noOfHours * tm.hourlyRate
-}
-
-func (tm TimeAndMaterial) source() string {
-	return tm.projectName
-}
-
-func (a Advertisement) calculate() int {
-	return a.CPC * a.noOfClicks
-}
-
-func (a Advertisement) source() string {
-	return a.adName
-}
-
-func calculateNetIncome(ic []Income) {
-	var netincome int
-	for _, income := range ic {
-		fmt.Printf("Income From %s = $%d\n", income.source(), income.calculate())
-		netincome += income.calculate()
-	}
-	fmt.Printf("Net income of organisation = $%d", netincome)
+/* define a method for shape */
+func getArea(shape Shape) float64 {
+   return shape.area()
 }
 
 func main() {
-	project1 := FixedBilling{projectName: "Project 1", biddedAmount: 5000}
-	project2 := FixedBilling{projectName: "Project 2", biddedAmount: 10000}
-	project3 := TimeAndMaterial{projectName: "Project 3", noOfHours: 160, hourlyRate: 25}
-	bannerAd := Advertisement{adName: "Banner Ad", CPC: 2, noOfClicks: 500}
-	popupAd := Advertisement{adName: "Popup Ad", CPC: 5, noOfClicks: 750}
-	incomeStreams := []Income{project1, project2, project3, bannerAd, popupAd}
-	calculateNetIncome(incomeStreams)
+   circle := Circle{x:0,y:0,radius:5}
+   rectangle := Rectangle {width:10, height:5}
+
+   fmt.Printf("Circle area: %f\n",getArea(circle))
+   fmt.Printf("Rectangle area: %f\n",getArea(rectangle))
 }
-```
-
-The above program will output,
-
-```
-Income From Project 1 = $5000
-Income From Project 2 = $10000
-Income From Project 3 = $4000
-Income From Banner Ad = $1000
-Income From Popup Ad = $3750
-Net income of organisation = $23750
 ```
 
 ## Type Assertions
