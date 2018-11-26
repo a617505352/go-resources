@@ -12,11 +12,15 @@
 
 ## Resources
 
-- [ ] [The go programming language](https://www.gopl.io)
 - [x] [Programming with Google Go](https://goo.gl/Y1r1bA) ★
+- [ ] [Exercism.io - Go](http://exercism.io/languages/go) ★
+- [ ] [The go programming language](https://www.gopl.io)
 - [ ] [TutorialEdge](https://tutorialedge.net/course/golang/)
 - [ ] [Golangbot.com](https://golangbot.com/learn-golang-series/)
 - [ ] [Go in action](https://www.manning.com/books/go-in-action)
 - [x] [TutorialsPoint](https://www.tutorialspoint.com/go/)
 - [x] [A tour of go](https://tour.golang.org/list)
 - [ ] [Go by Example](https://gobyexample.com/)
+- [x] [Learn Go in Y Minutes](https://learnxinyminutes.com/docs/go/)
+- [ ] [Gopher Guides](https://www.gopherguides.com/)
+- [ ] [Go Bootcamp](http://www.golangbootcamp.com/book/)
