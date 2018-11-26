@@ -15,38 +15,37 @@
 
 # Program Structure
 
-## Names
-
-In Go language, a name is exported if it starts with capital letter. Exported means the function or variable/constant is accessible to the importer of the respective package.
-
-## Variables
-
-Variable is the name given to a memory location to store a value of a specific type. There are various syntaxes to declare variables in go.
+## Variables and Type inference
 
 ```go
-// Declaring a single variable
-var name type
-// Declaring a variable with initial value
-var name type = initialvalue
-// Multiple variable declaration
-var name1, name2 type = initialvalue1, initialvalue2
+var (
+	name          string
+	age, location string
+    // Type inference
+	money             = 1000
+    height, wight int = 180, 70
+)
+
+func main() {
+	// Short Variable Declarations
+	name, location := "Prince Oberyn", "Dorne"
+}
 ```
 
-### Zero values
-
-Variables declared without an explicit initial value are given their zero value.
-
-The zero value is:
-
-- `0` for numeric types
-- `false` for the boolean type
-- `""` (the empty string) for strings
-
-### Short Variable Declarations
+## Constants
 
 ```go
-name := expression
+const (
+	Pi    = 3.14
+	Truth = false
+	Big   = 1 << 62
+	Small = Big >> 61
+)
 ```
+
+## Exported names
+
+In Go, a name is exported if it begins with a capital letter.
 
 ## Pointers
 
@@ -102,25 +101,13 @@ Lexical Scoping defines how variable names are resolved in nested functions. Oth
 - Booleans
 - Strings
 
-## Constants
-
-### The Constant Generator _iota_
-
-```go
-const (
-    Sunday Weekday = iota
-    Monday
-    Tuesday
-    Wednesday
-    Thursday
-    Friday
-    Saturday
-)
-```
-
 ## Type Conversions
 
-`T(v)` is the syntax to convert a value v to type T
+```go
+i := 42
+f := float64(i)
+u := uint(f)
+```
 
 [[↑] Back to top](#golang-fundamental)
 
