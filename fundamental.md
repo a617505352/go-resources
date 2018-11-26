@@ -1,4 +1,4 @@
-<h1 align="center">Golang Notes</h1>
+<h1 align="center">Golang Fundamental</h1>
 
 - [Program Structure](#program-tructure)
 - [Basic Data Types](#basic-data-types)
@@ -92,7 +92,7 @@ A sequence of declarations and statements within matching brackets, `{}`
 
 Lexical Scoping defines how variable names are resolved in nested functions. Other names of Lexical Scoping are Static Scoping or Closure. It means that the scope of an inner function contains the scope of a parent function.
 
-[[↑] Back to top](#golang-notes)
+[[↑] Back to top](#golang-fundamental)
 
 # Basic Data Types
 
@@ -122,7 +122,7 @@ const (
 
 `T(v)` is the syntax to convert a value v to type T
 
-[[↑] Back to top](#golang-notes)
+[[↑] Back to top](#golang-fundamental)
 
 # Composite Types
 
@@ -131,23 +131,16 @@ const (
 An array is a **ﬁxed-length** sequence of zero or more elements of a particular type.
 
 ```go
-var variable_name [SIZE] variable_type
-```
-
-### Array Literal
-
-```go
-// [n]T{element1, element2}
-var x [5]int{1, 2, 3, 4, 5}
-```
-
-### Interating Through Arrays
-
-```go
-x := [3]int {1, 2, 3}
-
-for i, v range x {
-    fmt.Printf("index %d, value %d", i, v)
+func main() {
+	// declaring an empty array of strings
+	var weeks []string
+	fmt.Println(weeks)
+	// declaring an array with elements
+	days := [...]string{"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"}
+	// interating through arrays
+	for _, v := range days {
+		fmt.Println(v)
+	}
 }
 ```
 
@@ -172,15 +165,6 @@ func main() {
 	// cap() -> the capacity of the slice
 	fmt.Println(cap(x))
 }
-```
-
-### Make
-
-The make built-in function allocates and initializes an object of type slice, map, or chan (only).
-
-```go
-person := make(map[string]string)
-receiver := make(chan string)
 ```
 
 ### Append
@@ -298,7 +282,7 @@ Year int `json:"released"`
 Color bool `json:"color,omitempty"`
 ```
 
-[[↑] Back to top](#golang-notes)
+[[↑] Back to top](#golang-fundamental)
 
 # Functions
 
@@ -429,13 +413,21 @@ func main() {
 ### Anonymous Functions
 
 ```go
-func applyIt(afunct func(int) int, val int) int {
-	return afunct(val)
+func addOne() func() int {
+  var x int
+  // Anonymous Functions
+  return func() int {
+    x++
+    return x + 1
+  }
 }
 
 func main() {
-	v := applyIt(func(x int) int { return x + 1 }, 2)
-	fmt.Println(v)
+  myFunc := addOne()
+  fmt.Println(myFunc()) // 2
+  fmt.Println(myFunc()) // 3
+  fmt.Println(myFunc()) // 4
+  fmt.Println(myFunc()) // 5
 }
 ```
 
@@ -484,7 +476,7 @@ func main() {
 - More difficult with a large number of parameters
 - Function may have bad functional cohesion
 
-[[↑] Back to top](#golang-notes)
+[[↑] Back to top](#golang-fundamental)
 
 # Methods
 
@@ -565,11 +557,20 @@ func (p *Point) OffsetX(v int) {
 
 ## Composing Types by Struct Embedding
 
-[[↑] Back to top](#golang-notes)
+[[↑] Back to top](#golang-fundamental)
 
 # Interfaces
 
 Interface specifies what methods a type should have and the type decides how to implement these methods.
+
+```go
+type Employee interface {
+	Name() string
+	Language() string
+	Age() int
+	Random() (string, error)
+}
+```
 
 ## Interface vs. Concrete Types
 
@@ -697,7 +698,7 @@ func DrawShape (s Shape2D) bool {
 
 ```
 
-[[↑] Back to top](#golang-notes)
+[[↑] Back to top](#golang-fundamental)
 
 # Goroutines and Channels
 
@@ -853,7 +854,7 @@ for {
 }
 ```
 
-[[↑] Back to top](#golang-notes)
+[[↑] Back to top](#golang-fundamental)
 
 # Concurrency with Shared Variables
 
@@ -905,7 +906,7 @@ func main() {
 
 ##
 
-[[↑] Back to top](#golang-notes)
+[[↑] Back to top](#golang-fundamental)
 
 # Packages and the Go Tool
 
@@ -952,7 +953,7 @@ The go tool combines the features of a diverse set of tools into one command set
 go
 ```
 
-[[↑] Back to top](#golang-notes)
+[[↑] Back to top](#golang-fundamental)
 
 # Testing
 
@@ -974,7 +975,7 @@ func BenchmarkIsPalindrome(b *testing.B) {
 }
 ```
 
-[[↑] Back to top](#golang-notes)
+[[↑] Back to top](#golang-fundamental)
 
 # Reflection
 
@@ -982,7 +983,7 @@ func BenchmarkIsPalindrome(b *testing.B) {
 
 Reflection is the ability of a program to inspect its variables and values at run time and find their type. You might not understand what this means but that's alright.
 
-[[↑] Back to top](#golang-notes)
+[[↑] Back to top](#golang-fundamental)
 
 # Others
 
@@ -1106,4 +1107,4 @@ var x int
 - Threads
 - Queues
 
-[[↑] Back to top](#golang-notes)
+[[↑] Back to top](#golang-fundamental)

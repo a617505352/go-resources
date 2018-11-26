@@ -6,14 +6,16 @@
 
 ### Notes
 
-- [Notes](https://github.com/LIYINGZHEN/learning-go/blob/master/notes.md)
+- [Fundamental](https://github.com/LIYINGZHEN/learning-go/blob/master/fundamental.md)
+- [Reading Writing Files](https://github.com/LIYINGZHEN/learning-go/blob/master/reading-writing-files.md)
 
 ## Resources
 
-- [ ] [The go programming language](https://www.gopl.io) ★★★★★
+- [ ] [The go programming language](https://www.gopl.io)
+- [x] [Programming with Google Go](https://goo.gl/Y1r1bA) ★
+- [ ] [TutorialEdge](https://tutorialedge.net/course/golang/)
 - [ ] [Golangbot.com](https://golangbot.com/learn-golang-series/)
 - [ ] [Go in action](https://www.manning.com/books/go-in-action)
-- [x] [Programming with Google Go](https://www.coursera.org/specializations/google-golang) ★★★★★
 - [x] [TutorialsPoint](https://www.tutorialspoint.com/go/)
 - [x] [A tour of go](https://tour.golang.org/list)
-- [x] [Go by Example](https://gobyexample.com/)
+- [ ] [Go by Example](https://gobyexample.com/)

@@ -1,21 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io/ioutil"
+)
 
 func main() {
-	// declare a variable, by default map will be nil
-	var countryCapitalMap map[string]string
-	// define the map as nil map can not be assigned any value
-	countryCapitalMap = make(map[string]string)
-	// map literal
-	countryCapitalMap2 := map[string]string{
-		"France": "Paris",
-		"Italy":  "Rome",
-		"Japan":  "Tokyo",
-		"India":  "New Delhi",
+	mydata := []byte("All the data I wish to write to a file")
+	// the WriteFile method returns an error if unsuccessful
+	err := ioutil.WriteFile("myfile.data", mydata, 0777)
+	if err != nil {
+		fmt.Println(err)
 	}
-	// delete() function is used to delete an entry from a map.
-	delete(countryCapitalMap2, "France")
-	fmt.Println(countryCapitalMap)
-	fmt.Println(countryCapitalMap2)
+
+	data, err := ioutil.ReadFile("myfile.data")
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Print(string(data))
 }
