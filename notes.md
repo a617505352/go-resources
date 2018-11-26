@@ -848,74 +848,51 @@ ch := make(chan type)
 ch := make(chan type, capacity)
 ```
 
-## Multiplexing with select
+## Iterating Through a Channel
 
-### What is select?
-
-The select statement is used to choose from multiple send/receive channel operations.
+- Common to iteratively read from a channel
 
 ```go
-package main
-
-import (
-    "fmt"
-    "time"
-)
-
-func server1(ch chan string) {
-    time.Sleep(6 * time.Second)
-    ch <- "from server1"
-}
-func server2(ch chan string) {
-    time.Sleep(3 * time.Second)
-    ch <- "from server2"
-
-}
-func main() {
-    output1 := make(chan string)
-    output2 := make(chan string)
-    go server1(output1)
-    go server2(output2)
-    select {
-    case s1 := <-output1:
-        fmt.Println(s1)
-    case s2 := <-output2:
-        fmt.Println(s2)
-    }
+for i := range c {
+    fmt.Println(i)
 }
 ```
 
-### Default case
+- Continues to read from channel c
+- One iteration each time a new value is received
+- Iterates when sender calls `close(c)`
 
-The default case in a select statement is executed when none of the other case is ready. This is generally used to prevent the select statement from blocking.
+## Receiving from Multiple Goroutines
+
+### Select Statement
+
+- May have a choice of which data to use
+- Use the select statement to wait on the first data from a set of channels
 
 ```go
-package main
-
-import (
-    "fmt"
-    "time"
-)
-
-func process(ch chan string) {
-    time.Sleep(10500 * time.Millisecond)
-    ch <- "process successful"
+select {
+    case a = <- c1:
+        fmt.Println(a)
+    case b = <- c2:
+        fmt.Println(b)
+    default:
+        fmt.Println("nop")
 }
+```
 
-func main() {
-    ch := make(chan string)
-    go process(ch)
-    for {
-        time.Sleep(1000 * time.Millisecond)
-        select {
-        case v := <-ch:
-            fmt.Println("received value: ", v)
+### Select with an Abort Channel
+
+- Use select with a separate abort channel
+- May want to receive data until an abort signal is received
+
+```go
+for {
+    select {
+        case a <- c:
+            fmt.Println(a)
+        case <- abort:
             return
-        default:
-            fmt.Println("no value received")
-        }
     }
-
 }
 ```
 
@@ -923,15 +900,53 @@ func main() {
 
 # Concurrency with Shared Variables
 
-## Mutual Exclusion: sync.Mutex
+- Sharing variables concurrently can cause problems
+- Tow goroutines writing to a shared variable can interfere with each other
 
-A Mutex is used to provide a locking mechanism to ensure that only one Goroutine is running the critical section of code at any point of time to prevent race condition from happening.
+## sync.Mutex
+
+- A Mutex ensures mutual exclusion
+- Vues a binary semaphore
 
 ```go
-mutex.Lock()
-x = x + 1
-mutex.Unlock()
+var i int = 0
+var mut sync.Mutex
+
+func inc() {
+    mutex.Lock()
+    x = x + 1
+    mutex.Unlock()
+}
 ```
+
+## sync.Once
+
+- Function f is executed only one time
+- All calls to once.DO9() block until the first returns
+
+```go
+var wg sync.WaitGroup
+var on sync.Once
+
+func setup() {
+	fmt.Println("Init")
+}
+
+func doStuff() {
+	on.Do(setup)
+	fmt.Println("hello")
+	wg.Done()
+}
+
+func main() {
+	wg.Add(2)
+	go doStuff()
+	go doStuff()
+	wg.Wait()
+}
+```
+
+##
 
 [[↑] Back to top](#golang-notes)
 

@@ -2,16 +2,25 @@ package main
 
 import (
 	"fmt"
+	"sync"
 )
 
-type test struct {
+var wg sync.WaitGroup
+var on sync.Once
+
+func setup() {
+	fmt.Println("Init")
 }
 
-func (t *test) what(value int) {
-	fmt.Print("11")
+func doStuff() {
+	on.Do(setup)
+	fmt.Println("hello")
+	wg.Done()
 }
 
 func main() {
-	var wg test
-	wg.what(1)
+	wg.Add(2)
+	go doStuff()
+	go doStuff()
+	wg.Wait()
 }
