@@ -1,7 +1,6 @@
 <h1 align="center">Golang Fundamental</h1>
 
 - [Program Structure](#program-tructure)
-- [Basic Data Types](#basic-data-types)
 - [Composite Types](#composite-types)
 - [Functions](#functions)
 - [Methods](#methods)
@@ -93,14 +92,6 @@ Lexical Scoping defines how variable names are resolved in nested functions. Oth
 
 [[↑] Back to top](#golang-fundamental)
 
-# Basic Data Types
-
-- Integers
-- Floating-Point Numbers
-- Complex Numbers
-- Booleans
-- Strings
-
 ## Type Conversions
 
 ```go
@@ -115,15 +106,17 @@ u := uint(f)
 
 ## Arrays
 
-An array is a **ﬁxed-length** sequence of zero or more elements of a particular type.
+The type [n]T is an array of n values of type T.
 
 ```go
 func main() {
 	// declaring an empty array of strings
 	var weeks []string
-	fmt.Println(weeks)
+    fmt.Println(weeks)
+
 	// declaring an array with elements
-	days := [...]string{"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"}
+    days := [...]string{"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"}
+
 	// interating through arrays
 	for _, v := range days {
 		fmt.Println(v)
@@ -146,19 +139,19 @@ func main() {
 	// a slice of unspecified size
 	var numbers []int
 	// slice literal
-	x := []int{1, 2, 3, 4, 5}
+    x := []int{1, 2, 3, 4, 5}
+    // making slices
+    cities := make([]string, 3)
+
 	// len() -> the elements presents in the slice
 	fmt.Println(len(numbers))
 	// cap() -> the capacity of the slice
-	fmt.Println(cap(x))
+    fmt.Println(cap(x))
+
+    // appending to a slice
+    cities = append(cities, "San Diego", "Mountain View")
+    fmt.Println(cities)
 }
-```
-
-### Append
-
-```go
-var x []int
-x = append(x, 1)
 ```
 
 ## Maps
@@ -170,24 +163,27 @@ func main() {
 	// declare a variable, by default map will be nil
 	var countryCapitalMap map[string]string
 	// define the map as nil map can not be assigned any value
-	countryCapitalMap = make(map[string]string)
+    countryCapitalMap = make(map[string]string)
+
 	// map literal
-	countryCapitalMap2 := map[string]string{
-		"France": "Paris",
-		"Italy":  "Rome",
-		"Japan":  "Tokyo",
-		"India":  "New Delhi",
+	celebs := map[string]int{
+		"Nicolas Cage":       50,
+		"Selena Gomez":       21,
+		"Jude Law":           41,
+		"Scarlett Johansson": 29,
 	}
+
 	// delete() function is used to delete an entry from a map.
-	delete(countryCapitalMap2, "France")
+    delete(countryCapitalMap2, "France")
+
 	fmt.Println(countryCapitalMap)
-	fmt.Println(countryCapitalMap2)
+	fmt.Println(celebs)
 }
 ```
 
 ## Structs
 
-A struct is an aggregate data type that groups together zero or more named values of arbitrary types as a single entity.
+A struct is a collection of fields/properties.
 
 ```go
 // defining a structs
@@ -204,6 +200,43 @@ func main() {
 	}
 	// accessing struct members
 	fmt.Println(max.name)
+}
+```
+
+## Composition (Struct Embedding) vs inheritance
+
+Coming from an OOP background a lot of us are used to inheritance, something that isn’t supported by Go. Instead you have to think in terms of composition and interfaces.
+
+```go
+package main
+
+import "fmt"
+
+type User struct {
+	Id             int
+	Name, Location string
+}
+
+func (u *User) Greetings() string {
+	return fmt.Sprintf("Hi %s from %s",
+		u.Name, u.Location)
+}
+
+type Player struct {
+	*User
+	GameId int
+}
+
+func NewPlayer(id int, name, location string, gameId int) *Player {
+	return &Player{
+		User:   &User{id, name, location},
+		GameId: gameId,
+	}
+}
+
+func main() {
+	p := NewPlayer(42, "Matt", "LA", 90404)
+	fmt.Println(p.Greetings())
 }
 ```
 
@@ -542,13 +575,11 @@ func (p *Point) OffsetX(v int) {
 - Point is referenced as p, not \*p.
 - Dereferencing is automatic with `.` operator.
 
-## Composing Types by Struct Embedding
-
 [[↑] Back to top](#golang-fundamental)
 
 # Interfaces
 
-Interface specifies what methods a type should have and the type decides how to implement these methods.
+An interface type is defined by a set of methods. A value of interface type can hold any value that implements those methods.
 
 ```go
 type Employee interface {

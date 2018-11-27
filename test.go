@@ -1,21 +1,30 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-)
+import "fmt"
 
-const (
-	Pi    = 3.14
-	Truth = false
-	Big   = 1 << 62
-	Small = Big >> 61
-)
+type User struct {
+	Id             int
+	Name, Location string
+}
+
+func (u *User) Greetings() string {
+	return fmt.Sprintf("Hi %s from %s",
+		u.Name, u.Location)
+}
+
+type Player struct {
+	*User
+	GameId int
+}
+
+func NewPlayer(id int, name, location string, gameId int) *Player {
+	return &Player{
+		User:   &User{id, name, location},
+		GameId: gameId,
+	}
+}
 
 func main() {
-	scanner := bufio.NewScanner(os.Stdin)
-	for scanner.Scan() {
-		fmt.Println(scanner.Text())
-	}
+	p := NewPlayer(42, "Matt", "LA", 90404)
+	fmt.Println(p.Greetings())
 }
