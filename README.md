@@ -7,29 +7,35 @@
 ## Notes
 
 - [Fundamental](https://github.com/LIYINGZHEN/learning-go/blob/master/fundamental.md)
-- [Reading Writing Files](https://github.com/LIYINGZHEN/learning-go/blob/master/reading-writing-files.md)
-- [Reading in Console Input](https://github.com/LIYINGZHEN/learning-go/blob/master/reading-console-input)
 - [Mistakes I Made](https://github.com/LIYINGZHEN/learning-go/blob/master/mistakes-i-made.md)
 
 ## Resources
 
-### Excellent
+#### Good
 
+- [x] [Learn to Code Google's Go Programming Language](http://bit.ly/2DMm6S7)
 - [x] [Programming with Google Go](https://goo.gl/Y1r1bA)
 - [ ] [Exercism.io - Go](http://exercism.io/languages/go)
 
-### Books
+#### Books
 
-- [ ] [Go Bootcamp](http://www.golangbootcamp.com/book/)
 - [ ] [The go programming language](https://www.gopl.io)
 - [ ] [Go in action](https://www.manning.com/books/go-in-action)
+- [ ] [An Introduction to Programming in Go](https://www.golang-book.com/books/intro)
+- [x] [Go Bootcamp](http://www.golangbootcamp.com/book/)
 
-### Websites
+#### Websites
 
+- [ ] [Gophercises](https://gophercises.com)
+- [ ] [Effective Go](https://golang.org/doc/effective_go.html)
 - [ ] [TutorialEdge](https://tutorialedge.net/course/golang/)
 - [ ] [Golangbot.com](https://golangbot.com/learn-golang-series/)
-- [ ] [Go by Example](https://gobyexample.com/)
+- [ ] [Go By Example](https://gobyexample.com/)
 - [ ] [Gopher Guides](https://www.gopherguides.com/)
 - [x] [Learn Go in Y Minutes](https://learnxinyminutes.com/docs/go/)
 - [x] [TutorialsPoint](https://www.tutorialspoint.com/go/)
-- [x] [A tour of go](https://tour.golang.org/list)
+- [x] [A Tour of Go](https://tour.golang.org/)
+
+#### Videos
+
+- [ ] [Go: The Complete Developer's Guide](https://www.udemy.com/go-the-complete-developers-guide)

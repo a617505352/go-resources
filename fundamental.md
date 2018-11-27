@@ -328,17 +328,6 @@ By default, Go uses call by value to pass arguments. In general, it means the co
 - Programmer can pass a pointer as an argument.
 - Called function has direct access to caller viable in memory.
 
-## Error
-
-```go
-func Sqrt(value float64)(float64, error) {
-   if(value < 0) {
-      return 0, errors.New("Math: negative number passed to Sqrt")
-   }
-   return math.Sqrt(value)
-}
-```
-
 ## Variadic Functions
 
 A variadic function is a function that can accept variable number of arguments.
@@ -629,13 +618,45 @@ var s1 Speaker
 
 - Cannot call a method, runtime error
 
-## The error Interface
+## Errors
 
 Many Go programs return error interface objects to indicate errors
 
 ```go
 type error interface {
     Error() string
+}
+```
+
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+type MyError struct {
+    When time.Time
+    What string
+}
+
+func (e *MyError) Error() string {
+    return fmt.Sprintf("at %v, %s",
+        e.When, e.What)
+}
+
+func run() error {
+    return &MyError{
+        time.Now(),
+        "it didn't work",
+    }
+}
+
+func main() {
+    if err := run(); err != nil {
+        fmt.Println(err)
+    }
 }
 ```
 
