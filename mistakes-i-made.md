@@ -23,3 +23,43 @@ You are declaring distance before you check if the length is equal, so the decla
 ## Pointer to an interface
 
 A pointer to a struct and a pointer to an interface are not the same. An interface can store either a struct directly or a pointer to a struct. In the latter case, you still just use the interface directly, not a pointer to the interface.
+
+## Don' know how modules work
+
+You might be aware of "Go modules', but not quite sure what they are or how to use them. Go core team member Russ Cox has written a series of blog posts explaining how modules work, and what problems they solve, which you might find interesting: [Go += Package Versioning](https://research.swtch.com/vgo-intro)
+
+## How to write benchmarks in Go
+
+I have made some suggestions that involve benchmarking (testing the performance and efficiency of your code). If you're already familiar with benchmarking you can skip this.
+
+Benchmarks already exist for this exercise. You can execute them with:
+
+```bash
+go test -v --bench . --benchmem
+```
+
+This will first run the tests, and then the benchmarks, producing something like this:
+
+```bash
+goos: darwin
+goarch: amd64
+pkg: path/to/exercise
+BenchmarkName-8  100000  1859 ns/op  57 B/op  7 allocs/op
+PASS
+ok  path/to/exercise   2.042s
+For each benchmark there will be a line starting with the BenchmarkName followed by the number of cores (8) available. The next number (100000) indicates how many times the benchmark was run. Go will automatically work out how many times to run the benchmark to get a statistically useful result.
+```
+
+The next three numbers indicate:
+
+the time it took to execute the benchmark, in ns/op (nanoseconds per operation)
+
+the memory usage, in B/op (bytes of memory allocated per operation)
+
+the number of memory allocations, in alloc/op
+
+For all these numbers, lower is better.
+
+The last number 2.042s indicates the total execution time for all tests and benchmarks. Ignore this. This is not significant for measuring speed! The benchmarking tool in Go executes faster benchmarks more often to produce more reliable results, possibly increasing the total execution time.
+
+Dave Cheney has written a good blog post on Go benchmarking which you may find interesting: [How to write benchmarks in Go](https://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go)

@@ -21,7 +21,7 @@
 
 - [ ] [The go programming language](https://www.gopl.io)
 - [ ] [Go in action](https://www.manning.com/books/go-in-action)
-- [ ] [An Introduction to Programming in Go](https://www.golang-book.com/books/intro)
+- [x] [An Introduction to Programming in Go](https://www.golang-book.com/books/intro)
 - [x] [Go Bootcamp](http://www.golangbootcamp.com/book/)
 
 #### Websites
@@ -30,8 +30,8 @@
 - [ ] [Effective Go](https://golang.org/doc/effective_go.html)
 - [ ] [TutorialEdge](https://tutorialedge.net/course/golang/)
 - [ ] [Golangbot.com](https://golangbot.com/learn-golang-series/)
-- [ ] [Go By Example](https://gobyexample.com/)
 - [ ] [Gopher Guides](https://www.gopherguides.com/)
+- [ ] [Go By Example](https://gobyexample.com/)
 - [x] [Learn Go in Y Minutes](https://learnxinyminutes.com/docs/go/)
 - [x] [TutorialsPoint](https://www.tutorialspoint.com/go/)
 - [x] [A Tour of Go](https://tour.golang.org/)
