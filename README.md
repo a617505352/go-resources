@@ -18,6 +18,7 @@
 - [x] [Learn to Code Google's Go Programming Language](http://bit.ly/2DMm6S7)
 - [x] [Programming with Google Go](https://goo.gl/Y1r1bA)
 - [x] [Golangbot.com](https://golangbot.com/learn-golang-series/)
+- [x] [基于 Go 语言构建企业级的 RESTful API 服务](https://juejin.im/book/5b0778756fb9a07aa632301e)
 
 #### Books
 
