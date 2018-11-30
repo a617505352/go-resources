@@ -7,15 +7,17 @@
 ## Notes
 
 - [Fundamental](https://github.com/LIYINGZHEN/learning-go/blob/master/fundamental.md)
+- [Golang Interview Questions](https://github.com/LIYINGZHEN/learning-go/blob/master/golang-interview-questions.md)
 - [Mistakes I Made](https://github.com/LIYINGZHEN/learning-go/blob/master/mistakes-i-made.md)
 
 ## Resources
 
 #### Good
 
+- [ ] [Exercism.io - Go](http://exercism.io/languages/go)
 - [x] [Learn to Code Google's Go Programming Language](http://bit.ly/2DMm6S7)
 - [x] [Programming with Google Go](https://goo.gl/Y1r1bA)
-- [ ] [Exercism.io - Go](http://exercism.io/languages/go)
+- [x] [Golangbot.com](https://golangbot.com/learn-golang-series/)
 
 #### Books
 
@@ -29,7 +31,6 @@
 - [ ] [Gophercises](https://gophercises.com)
 - [ ] [Effective Go](https://golang.org/doc/effective_go.html)
 - [ ] [TutorialEdge](https://tutorialedge.net/course/golang/)
-- [ ] [Golangbot.com](https://golangbot.com/learn-golang-series/)
 - [ ] [Gopher Guides](https://www.gopherguides.com/)
 - [ ] [Go By Example](https://gobyexample.com/)
 - [x] [Learn Go in Y Minutes](https://learnxinyminutes.com/docs/go/)
