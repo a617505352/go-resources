@@ -2,7 +2,7 @@
 
 ## What is an interface?
 
-An interface type is defined by a set of methods. A value of interface type can hold any value that implements those methods.
+An interface type is defined by a set of methods and any type that implement those methods can be stored in the interface type.
 
 ## What is an empty Interface?
 
