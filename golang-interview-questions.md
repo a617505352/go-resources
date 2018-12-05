@@ -13,3 +13,17 @@ An empty interface type has zero methods so it can store any type.
 ## What are Goroutines?
 
 ## Advantages of using Goroutines over Threads
+
+## What are the three parts of an HTTP request?
+
+1. Request-line 
+2. Zero or more request headers 
+3. An empty line 
+4. The message body (optional)
+
+## What are the three parts of an HTTP response?
+
+1. A status line 
+2. Zero or more response headers 
+3. An empty line 
+4. The message body (optional)
