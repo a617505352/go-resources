@@ -41,12 +41,12 @@
 
 ## Web
 
-- [build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang)
+- [Build Web Application With Golang](https://github.com/astaxie/build-web-application-with-golang)
 - [Learn Web Programming in Go by Examples](https://gowebexamples.com/)
 - [Go Web Programming](https://www.manning.com/books/go-web-programming)
 - [Web Development with Google’s Go Programming Language](https://greatercommons.com/learn/go-language)
-- [基于 Go 语言构建企业级的 RESTful API 服务](https://juejin.im/book/5b0778756fb9a07aa632301e)
 - [Mastering Go Web Services](https://www.packtpub.com/web-development/mastering-go-web-services)
+- [基于 Go 语言构建企业级的 RESTful API 服务](https://juejin.im/book/5b0778756fb9a07aa632301e)
 
 ---
 
