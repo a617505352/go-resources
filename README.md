@@ -41,6 +41,7 @@
 
 ## Web
 
+- [build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang)
 - [Learn Web Programming in Go by Examples](https://gowebexamples.com/)
 - [Go Web Programming](https://www.manning.com/books/go-web-programming)
 - [Web Development with Google’s Go Programming Language](https://greatercommons.com/learn/go-language)
