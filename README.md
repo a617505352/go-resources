@@ -5,10 +5,6 @@
 </p>
 
 - [Basic](#basic)
-  - [Books](#books)
-  - [Websites](#websites)
-  - [Videos](#videos)
-  - [Chinese](#chinese)
 - [Web](#web)
 
 ## Basic
@@ -17,8 +13,9 @@
 
 - [The go programming language](https://www.gopl.io)
 - [Go in action](https://www.manning.com/books/go-in-action)
+- [Go in Practice](https://www.manning.com/books/go-in-practice)
 - [An Introduction to Programming in Go](https://www.golang-book.com/books/intro)
-- [Go Bootcamp](http://www.golangbootcamp.com/book/)
+- [Go Bootcamp](http://www.golangbootcamp.com/book/))
 
 ### Websites
 
@@ -41,12 +38,21 @@
 
 ## Web
 
+### Books
+
+- [Go Web Programming](https://www.manning.com/books/go-web-programming)
+- [Mastering Go Web Services](https://www.packtpub.com/web-development/mastering-go-web-services)
+- [Go: Building Web Applications](https://amzn.to/2RM5rCB)
+
+### Websites
+
 - [Build Web Application With Golang](https://github.com/astaxie/build-web-application-with-golang)
 - [Learn Web Programming in Go by Examples](https://gowebexamples.com/)
-- [Go Web Programming](https://www.manning.com/books/go-web-programming)
-- [Web Development with Google’s Go Programming Language](https://greatercommons.com/learn/go-language)
-- [Mastering Go Web Services](https://www.packtpub.com/web-development/mastering-go-web-services)
 - [基于 Go 语言构建企业级的 RESTful API 服务](https://juejin.im/book/5b0778756fb9a07aa632301e)
+
+### Videos
+
+- [Web Development with Google’s Go Programming Language](https://greatercommons.com/learn/go-language)
 
 ---
 
