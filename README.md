@@ -40,6 +40,7 @@
 
 ### Books
 
+- [Web Development with Go](https://www.usegolang.com/)
 - [Go Web Programming](https://www.manning.com/books/go-web-programming)
 - [Mastering Go Web Services](https://www.packtpub.com/web-development/mastering-go-web-services)
 - [Go: Building Web Applications](https://amzn.to/2RM5rCB)
