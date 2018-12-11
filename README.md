@@ -19,7 +19,7 @@
 
 ### Websites
 
-- [Exercism.io - Go](http://exercism.io/languages/go)
+- [Exercism.io - Go](http://exercism.io/languages/go) ⭐
 - [Gophercises](https://gophercises.com)
 - [Effective Go](https://golang.org/doc/effective_go.html)
 - [TutorialEdge](https://tutorialedge.net/course/golang/)
@@ -40,7 +40,7 @@
 
 ### Books
 
-- [Web Development with Go](https://www.usegolang.com/)
+- [Web Development with Go](https://www.usegolang.com/) ⭐
 - [Go Web Programming](https://www.manning.com/books/go-web-programming)
 - [Mastering Go Web Services](https://www.packtpub.com/web-development/mastering-go-web-services)
 - [Go: Building Web Applications](https://amzn.to/2RM5rCB)
