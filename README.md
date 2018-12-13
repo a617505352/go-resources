@@ -11,6 +11,7 @@
 
 ### Books
 
+- [Head First Go](https://www.oreilly.com/library/view/head-first-go/9781491969540/) ⭐
 - [The go programming language](https://www.gopl.io)
 - [Go in action](https://www.manning.com/books/go-in-action)
 - [Go in Practice](https://www.manning.com/books/go-in-practice)
