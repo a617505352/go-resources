@@ -1,6 +1,5 @@
 <h1 align="center">Golang Fundamental</h1>
 
-- [Program Structure](#program-tructure)
 - [Composite Types](#composite-types)
 - [Functions](#functions)
 - [Methods](#methods)
@@ -11,96 +10,6 @@
 - [Testing](#testing)
 - [Reflection](#reflection)
 - [Others](#others)
-
-# Program Structure
-
-## Variables and Type inference
-
-```go
-var (
-	name          string
-	age, location string
-    // Type inference
-	money             = 1000
-    height, wight int = 180, 70
-)
-
-func main() {
-	// Short Variable Declarations
-	name, location := "Prince Oberyn", "Dorne"
-}
-```
-
-## Constants
-
-```go
-const (
-	Pi    = 3.14
-	Truth = false
-	Big   = 1 << 62
-	Small = Big >> 61
-)
-```
-
-## Exported names
-
-In Go, a name is exported if it begins with a capital letter.
-
-## Pointers
-
-A pointer is a variable which stores the memory address of another variable.
-
-![pointer](https://user-images.githubusercontent.com/11765228/48991422-ceea7000-f16d-11e8-955d-d035380500e7.png)
-
-```go
-func main() {
-	variable := 20
-	// pointer to an integer
-	var pointer *int
-	// & -> get the address of a variable
-	pointer = &variable
-	// * -> get the value from a pointer variable
-	fmt.Println(*pointer)
-}
-
-```
-
-## Type Declarations
-
-```go
-type name underlying-type
-```
-
-## Scope
-
-The places in code where a variable can be accessed.
-
-### Blocks
-
-A sequence of declarations and statements within matching brackets, `{}`
-
-#### Implicit Blocks
-
-- Universe bloack - all Go source
-- Packageblock - all source in a package
-- File block - all source in a file
-- `if`, `for`, `switch` ...
-
-### Lexical Scoping
-
-Lexical Scoping defines how variable names are resolved in nested functions. Other names of Lexical Scoping are Static Scoping or Closure. It means that the scope of an inner function contains the scope of a parent function.
-
-[[↑] Back to top](#golang-fundamental)
-
-## Type Conversions
-
-```go
-i := 42
-f := float64(i)
-u := uint(f)
-```
-
-[[↑] Back to top](#golang-fundamental)
 
 # Composite Types
 
@@ -154,55 +63,6 @@ func main() {
 }
 ```
 
-## Maps
-
-In Go, a map is a reference to a hash table.
-
-```go
-func main() {
-	// declare a variable, by default map will be nil
-	var countryCapitalMap map[string]string
-	// define the map as nil map can not be assigned any value
-    countryCapitalMap = make(map[string]string)
-
-	// map literal
-	celebs := map[string]int{
-		"Nicolas Cage":       50,
-		"Selena Gomez":       21,
-		"Jude Law":           41,
-		"Scarlett Johansson": 29,
-	}
-
-	// delete() function is used to delete an entry from a map.
-    delete(countryCapitalMap2, "France")
-
-	fmt.Println(countryCapitalMap)
-	fmt.Println(celebs)
-}
-```
-
-## Structs
-
-A struct is a collection of fields/properties.
-
-```go
-// defining a structs
-type person struct {
-	name string
-	age  int
-}
-
-func main() {
-	// struct literal
-	max := person{
-		name: "max",
-		age:  24,
-	}
-	// accessing struct members
-	fmt.Println(max.name)
-}
-```
-
 ## Composition (Struct Embedding) vs inheritance
 
 Coming from an OOP background a lot of us are used to inheritance, something that isn’t supported by Go. Instead you have to think in terms of composition and interfaces.
@@ -239,70 +99,6 @@ func main() {
 	fmt.Println(p.Greetings())
 }
 ```
-
-## JSON
-
-Converting a Go data structure like movies to JSON is called marshaling.
-
-### JSON Marshalling
-
-```go
-type person struct {
-    Name  string
-    Addr  string
-    Phone string
-}
-
-p1 := person{
-    Name:  "joe",
-    Addr:  "a st.",
-    Phone: "123",
-}
-
-barr, err := json.Marshal(p1)
-if err != nil {
-    panic(err)
-}
-
-fmt.Print(string(barr))
-```
-
-### JSON Unmarshalling
-
-```go
-type person struct {
-    Name  string
-    Addr  string
-    Phone string
-}
-
-byt := []byte(`
-    {
-        "Name":"joe",
-        "Addr":"a st.",
-        "Phone":"123"
-    }
-`)
-data := person{}
-
-err := json.Unmarshal(byt, &data)
-if err != nil {
-    panic(err)
-}
-
-fmt.Println(data)
-```
-
-### ﬁeld tag
-
-A ﬁeld tag is a string of m associated at compile time with the ﬁeld of a struct.
-
-```go
-Year int `json:"released"`
-Color bool `json:"color,omitempty"`
-```
-
-[[↑] Back to top](#golang-fundamental)
 
 # Functions
 
@@ -1122,22 +918,6 @@ func Signum(x int) int {
         return -1
     }
 }
-```
-
-## Comments
-
-- Single-line comments
-
-```go
-// This is a comment
-var x int // Another comment
-```
-
-- Block comments
-
-```go
-/* Comment 1 Comment 2 */
-var x int
 ```
 
 ## Operating System
