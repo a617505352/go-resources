@@ -30,26 +30,6 @@ func marshalling() {
 		} `json:"responseData"`
 	}
 
-	var a = struct {
-		GsearchResultClass string `json:"GsearchResultClass"`
-		UnescapedURL       string `json:"unescapedUrl"`
-		URL                string `json:"url"`
-		VisibleURL         string `json:"visibleUrl"`
-		CacheURL           string `json:"cacheUrl"`
-		Title              string `json:"title"`
-		TitleNoFormatting  string `json:"titleNoFormatting"`
-		Content            string `json:"content"`
-	}{
-		GsearchResultClass: "GwebSearch",
-		UnescapedURL:       "https://www.reddit.com/r/golang",
-		URL:                "https://www.reddit.com/r/golang",
-		VisibleURL:         "www.reddit.com",
-		CacheURL:           "http://www.google.com/search?q=cache:W...",
-		Title:              "r/\u003cb\u003eGolang\u003c/b\u003e - Reddit",
-		TitleNoFormatting:  "r/Golang - Reddit",
-		Content:            "First Open Source",
-	}
-
 	r := gResponse{
 		ResponseData: struct {
 			Results []struct {
@@ -74,7 +54,14 @@ func marshalling() {
 				Content            string `json:"content"`
 			}{
 				{
-					// ????
+					GsearchResultClass: "GwebSearch",
+					UnescapedURL:       "https://www.reddit.com/r/golang",
+					URL:                "https://www.reddit.com/r/golang",
+					VisibleURL:         "www.reddit.com",
+					CacheURL:           "http://www.google.com/search?q=cache:W...",
+					Title:              "r/\u003cb\u003eGolang\u003c/b\u003e - Reddit",
+					TitleNoFormatting:  "r/Golang - Reddit",
+					Content:            "First Open Source",
 				},
 			},
 		},
