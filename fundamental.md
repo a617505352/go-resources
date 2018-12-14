@@ -759,37 +759,6 @@ import (
 )
 ```
 
-## The Package Declaration
-
-```go
-package main
-```
-
-## Import Declarations
-
-```go
-import (
-    "crypto/rand"
-    mrand "math/rand" // alternative name mrand avoids conflict
-)
-```
-
-## Blank Imports
-
-```go
-import _ "image/png" // register PNG decoder
-```
-
-## The Go Tool
-
-The go tool combines the features of a diverse set of tools into one command set.
-
-```bash
-go
-```
-
-[[↑] Back to top](#golang-fundamental)
-
 # Testing
 
 ## _Test_ Functions
@@ -869,56 +838,6 @@ Heap is persistent
 - Implementation is fast
 - The compiler determines stack vs heap
 - Garbage collection in the background
-
-## Control Flows
-
-### For loop
-
-```go
-for initialization; condition; update {
-    // zero or more statements
-}
-```
-
-```go
-// a traditional "while" loop
-for condition {
-    // ...
-}
-```
-
-```go
-// inﬁnite loop
-for {
-    // ...
-}
-```
-
-### Switch/Case
-
-```go
-switch coinflip() {
-	case "heads":
-		heads++
-	case "tails":
-		tails++
-	default:
-		fmt.Println("landed on edge!")
-}
-```
-
-```go
-// tagless switch
-func Signum(x int) int {
-    switch {
-        case x > 0:
-            return +1
-        default: return 0
-            case x < 0:
-        return -1
-    }
-}
-```
 
 ## Operating System
 
