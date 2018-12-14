@@ -7,10 +7,9 @@ import (
 
 func main() {
 	basic()
-	structLiteral()
+	structLiterals()
 	comparingEmptyStruct()
 	assignAndAccessStructField()
-	anonymousStructField()
 	embeddingStructs()
 }
 
@@ -33,10 +32,17 @@ func basic() {
 }
 
 /*
-	STRUCT LITERAL
+	STRUCT LITERALS
 */
-func structLiteral() {
-
+func structLiterals() {
+	var person = struct {
+		name string
+		age  int
+	}{
+		name: "max",
+		age:  24,
+	}
+	fmt.Printf("%+v\n", person)
 }
 
 /*
@@ -85,15 +91,22 @@ func assignAndAccessStructField() {
 }
 
 /*
-	ANONYMOUS STRUCT FIELDS
-*/
-func anonymousStructField() {
-
-}
-
-/*
 	EMBEDDING STRUCTS
 */
 func embeddingStructs() {
+	type Address struct {
+		Street string
+		City   string
+	}
+	type Employee struct {
+		Name   string
+		Salary string
+		// ANONYMOUS STRUCT FIELDS
+		Address
+	}
 
+	var e1 Employee
+	fmt.Printf("%+v\n", e1)
+	e1.City = "New York"
+	fmt.Printf("%+v\n", e1)
 }
