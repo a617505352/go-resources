@@ -93,20 +93,31 @@ func assignAndAccessStructField() {
 /*
 	EMBEDDING STRUCTS
 */
-func embeddingStructs() {
-	type Address struct {
-		Street string
-		City   string
-	}
-	type Employee struct {
-		Name   string
-		Salary string
-		// ANONYMOUS STRUCT FIELDS
-		Address
-	}
+type Address struct {
+	Street string
+	City   string
+}
+type Employee struct {
+	Name   string
+	Salary string
+	// ANONYMOUS STRUCT FIELDS
+	Address
+}
 
+func (a *Address) GetFullAddress() string {
+	return fmt.Sprintf("I live in %v city and the street is %v", a.City, a.Street)
+}
+
+func embeddingStructs() {
 	var e1 Employee
 	fmt.Printf("%+v\n", e1)
 	e1.City = "New York"
+	e1.Street = "Broadway"
 	fmt.Printf("%+v\n", e1)
+	/*
+		A type that is storted with a struct type using a anonymous field is said to be ebedded within the struct.
+		Methods of an embedded type get promted to the otuer type.
+		They can be called as if they were defined on the outer type.
+	*/
+	fmt.Printf("%+v\n", e1.GetFullAddress())
 }

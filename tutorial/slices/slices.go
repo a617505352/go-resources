@@ -7,6 +7,7 @@ import (
 
 func main() {
 	basic()
+	append()
 }
 
 /*
@@ -39,4 +40,8 @@ func basic() {
 	fmt.Println(s3 == nil)          // false
 	fmt.Println(len(s3))            // 0
 	fmt.Println(cap(s3))            // 0
+}
+
+func append() {
+
 }
