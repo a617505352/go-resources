@@ -1,13 +1,15 @@
 /*
-- An interface is a set of methods that certain values are expected to have.
-- Any type that has all the methods listed in an interface definition
-	is said to satisfy that interface.
+	Interfaces
+		- An interface is a set of methods that certain values are expected to have.
+		- Any type that has all the methods listed in an interface definition
+			is said to satisfy that interface.
 */
 package main
 
 import (
 	"fmt"
 	"math"
+	"time"
 )
 
 func main() {
@@ -48,35 +50,18 @@ func pointerMethods() {
 
 /*
 	 Type Assertions
-		- When you have a value of a concrete type assigned to a variable with an interface type, 
+		- When you have a value of a concrete type assigned to a variable with an interface type,
 			a type assertion lets you get the concrete type back.
 */
 func typeAssertions() {
-	func DrawShape(s Shape2D) bool {
-    rect, ok := s.(Rectangle)
-    if ok {
-        DrawRect(rect)
-    }
-    tri, ok := s.(Triangle)
-    if ok {
-        DrawTri(tri)
-    }
-}
 }
 
 /*
 	 Type Switch
 		- Switch statement used with a type assertion
 */
-func () {
-	func DrawShape (s Shape2D) bool {
-    switch sh := s.(type) {
-        case Rectangle:
-            DrawRact(sh)
-        case Triangle:
-            DrawTri(sh)
-    }
-}
+func typeSwitch() {
+
 }
 
 /*
@@ -120,54 +105,40 @@ func polymorphism() {
 		- The empty interface, and it's used to accept values of any type
 */
 func acceptAnything(thing interface{}) {
-	fmt.Printf("%+v", thing)
+	fmt.Printf("%+v\n", thing)
 }
 
-func emptyInterface(){
+func emptyInterface() {
 	acceptAnything("string")
 	acceptAnything(1)
 }
 
 /*
 	Error interface
-		- 
+		-
 */
-
-Many Go programs return error interface objects to indicate errors
-
-```go
 type error interface {
-    Error() string
+	Error() string
 }
-```
-
-```go
-package main
-
-import (
-    "fmt"
-    "time"
-)
 
 type MyError struct {
-    When time.Time
-    What string
+	When time.Time
+	What string
 }
 
 func (e *MyError) Error() string {
-    return fmt.Sprintf("at %v, %s",
-        e.When, e.What)
+	return fmt.Sprintf("at %v, %s", e.When, e.What)
 }
 
 func run() error {
-    return &MyError{
-        time.Now(),
-        "it didn't work",
-    }
+	return &MyError{
+		time.Now(),
+		"it didn't work",
+	}
 }
 
-func main() {
-    if err := run(); err != nil {
-        fmt.Println(err)
-    }
+func errorInterface() {
+	if err := run(); err != nil {
+		fmt.Println(err)
+	}
 }
