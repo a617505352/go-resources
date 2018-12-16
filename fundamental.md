@@ -26,42 +26,6 @@ for i := range c {
 - One iteration each time a new value is received
 - Iterates when sender calls `close(c)`
 
-## Receiving from Multiple Goroutines
-
-### Select Statement
-
-- May have a choice of which data to use
-- Use the select statement to wait on the first data from a set of channels
-
-```go
-select {
-    case a = <- c1:
-        fmt.Println(a)
-    case b = <- c2:
-        fmt.Println(b)
-    default:
-        fmt.Println("nop")
-}
-```
-
-### Select with an Abort Channel
-
-- Use select with a separate abort channel
-- May want to receive data until an abort signal is received
-
-```go
-for {
-    select {
-        case a <- c:
-            fmt.Println(a)
-        case <- abort:
-            return
-    }
-}
-```
-
-[[↑] Back to top](#golang-fundamental)
-
 ## sync.Once
 
 - Function f is executed only one time
@@ -90,30 +54,6 @@ func main() {
 ```
 
 ##
-
-[[↑] Back to top](#golang-fundamental)
-
-# Testing
-
-## _Test_ Functions
-
-```go
-func TestName(t *testing.T) {
-    // ...
-}
-```
-
-## _Benchmark_ Functions
-
-```go
-func BenchmarkIsPalindrome(b *testing.B) {
-    for i := 0; i < b.N; i++ {
-        IsPalindrome("A man, a plan, a canal: Panama")
-    }
-}
-```
-
-[[↑] Back to top](#golang-fundamental)
 
 # Reflection
 
