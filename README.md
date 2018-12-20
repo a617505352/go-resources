@@ -12,7 +12,8 @@
 ### Books
 
 - [Head First Go](https://www.oreilly.com/library/view/head-first-go/9781491969540/) ⭐
-- [Go in action](https://www.manning.com/books/go-in-action) ⭐
+- [Go Design Patterns](https://www.packtpub.com/application-development/go-design-patterns) ⭐
+- [Go in action](https://www.manning.com/books/go-in-action)
 - [The go programming language](https://www.gopl.io)
 - [Go in Practice](https://www.manning.com/books/go-in-practice)
 - [An Introduction to Programming in Go](https://www.golang-book.com/books/intro)
@@ -21,6 +22,7 @@
 ### Websites
 
 - [Exercism.io - Go](http://exercism.io/languages/go) ⭐
+- [Golangbot.com](https://golangbot.com/learn-golang-series/) ⭐
 - [Gophercises](https://gophercises.com)
 - [Effective Go](https://golang.org/doc/effective_go.html)
 - [TutorialEdge](https://tutorialedge.net/course/golang/)
@@ -29,7 +31,6 @@
 - [Learn Go in Y Minutes](https://learnxinyminutes.com/docs/go/)
 - [TutorialsPoint](https://www.tutorialspoint.com/go/)
 - [A Tour of Go](https://tour.golang.org/)
-- [Golangbot.com](https://golangbot.com/learn-golang-series/)
 
 ### Videos
 
@@ -42,7 +43,7 @@
 ### Books
 
 - [Go Programming Blueprints](http://bit.ly/2UNSt9i) ⭐
-- [Web Development with Go](https://www.usegolang.com/) ⭐
+- [Web Development with Go](https://www.usegolang.com/)
 - [Go Web Programming](https://www.manning.com/books/go-web-programming)
 - [Mastering Go Web Services](https://www.packtpub.com/web-development/mastering-go-web-services)
 - [Go: Building Web Applications](https://amzn.to/2RM5rCB)
