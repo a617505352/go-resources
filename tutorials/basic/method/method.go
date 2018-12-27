@@ -1,3 +1,7 @@
+/*
+	Method
+		- A method is just a function with a special receiver type that is written between the func keyword and the method name.
+*/
 package main
 
 import "fmt"
