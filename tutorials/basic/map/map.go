@@ -1,3 +1,8 @@
+/*
+	Map
+		- A map is a builtin type in Go which associates a value to a key.
+		- The value can be retrieved using the corresponding key.
+*/
 package main
 
 import (
