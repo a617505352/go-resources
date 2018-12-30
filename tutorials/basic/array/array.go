@@ -1,3 +1,7 @@
+/*
+	Array
+		- An array is a collection of elements that belong to the same type.
+*/
 package main
 
 import "fmt"
