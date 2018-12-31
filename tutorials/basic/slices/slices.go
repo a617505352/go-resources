@@ -1,3 +1,8 @@
+/*
+	Slice
+		- A slice is a convenient, flexible and powerful wrapper on top of an array.
+		- Slices do not own any data on their own. They are the just references to existing arrays.
+*/
 package main
 
 import (
