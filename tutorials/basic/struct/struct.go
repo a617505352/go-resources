@@ -1,3 +1,7 @@
+/*
+	Struct
+		- Typed collections of fields
+*/
 package main
 
 import (
