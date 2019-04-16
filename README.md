@@ -40,6 +40,12 @@
 
 ## Web
 
+### Articles
+
+- [Standard Package Layout](https://medium.com/@benbjohnson/standard-package-layout-7cdbc8391fc1)
+- [Don’t just check errors, handle them gracefully](https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully)
+- [Go best practices, six years in](https://peter.bourgon.org/go-best-practices-2016)
+
 ### Books
 
 - [Go Programming Blueprints](http://bit.ly/2UNSt9i) ⭐
